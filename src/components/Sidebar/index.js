@@ -33,13 +33,15 @@ class Sidebar extends Component {
                             <i className="fa fa-plus mr-5" />Add New Doc
                         </NavLink>
                         {Object.keys(data).map(key => {
+                            const { title } = data[key];
                             return (
                                 <NavLink
                                     key={key}
                                     className={action === key ? 'active' : ''}
                                     to={`/docs/${key}`}
+                                    title={title}
                                 >
-                                    {key}
+                                    {title}
                                 </NavLink>
                             );
                         })}

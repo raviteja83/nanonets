@@ -33,13 +33,13 @@ class DocumentDetail extends React.Component {
         getDataById(id);
     };
 
-    handleUpdate = value => {
+    handleUpdate = (value, title) => {
         const { id, updateDataForId } = this.props;
-        updateDataForId(id, value);
+        updateDataForId(id, { content: value, title });
     };
 
     render() {
-        const { loading, data } = this.props;
+        const { loading, data: { content, title } } = this.props;
 
         return (
             <div className="document-detail">
@@ -47,8 +47,12 @@ class DocumentDetail extends React.Component {
                     <div className="loader">
                         <GradientLoader />
                     </div>
-                ) : isEmpty(data) ? null : (
-                    <DocEditor data={data} onChange={this.handleUpdate} />
+                ) : isEmpty(content) || isEmpty(title) ? null : (
+                    <DocEditor
+                        data={content}
+                        title={title}
+                        onChange={this.handleUpdate}
+                    />
                 )}
             </div>
         );

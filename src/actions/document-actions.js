@@ -63,7 +63,7 @@ export function getDataById(id) {
     return dispatch => {
         const ref = firebase.database().ref(`/documents/${id}`);
         dispatch(getIdLoading(true));
-        return ref.once('value', snapshot => {
+        return ref.on('value', snapshot => {
             dispatch(getIdLoading(false));
             const data = snapshot.val();
             dispatch(addSuccess({ [id]: data }));

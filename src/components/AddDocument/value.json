@@ -9,7 +9,8 @@
                         "object": "text",
                         "leaves": [
                             {
-                                "text": "This is a title"
+                                "text":
+                                    "This is your content. Add text image etc"
                             }
                         ]
                     }

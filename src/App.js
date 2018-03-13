@@ -43,6 +43,7 @@ class App extends Component {
                             component={DocumentDetail}
                         />
                         <Route path="/" component={DataContainer} />
+                        <Route path="/docs" component={DataContainer} />
                     </Switch>
                 </div>
             </div>

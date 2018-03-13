@@ -18,9 +18,10 @@ import EmptyDocs from '../components/EmptyDocs';
 class DataContainer extends Component {
     componentDidMount() {
         this.props.getAllDocuments().then(() => {
-            const key = Object.keys(this.props.data)[0];
-            if (key) {
-                this.props.history.push(`/docs/${key}`);
+            const { location: { pathname }, data, history } = this.props;
+            const key = Object.keys(data)[0];
+            if (key && pathname === '/') {
+                history.push(`/docs/${key}`);
             }
         });
     }

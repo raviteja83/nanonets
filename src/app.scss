@@ -1,7 +1,5 @@
 .main-page {
     position: relative;
-    overflow: auto;
-    height: 100vh;
     .header {
         position: fixed;
         top: 0;
@@ -47,6 +45,7 @@
             padding: 6px 12px;
             color: $brand-secondary;
             text-decoration: none;
+            @include text-overflow-ellipsis;
 
             &.active {
                 background-color: rgba($brand-primary, 0.8);
@@ -68,13 +67,27 @@
         left: 250px;
         right: 0;
         height: 100vh;
-        overflow: auto;
         padding: 20px 40px;
         background: $gray-lightest;
 
         .data-container {
             display: flex;
             flex-flow: row wrap;
+            background: $gray-lightest;
+
+            .data-card {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 768px) {
+        .sidebar {
+            display: none;
+        }
+        .main-content {
+            left: 0;
+            padding: 10px;
         }
     }
 }

@@ -6,6 +6,7 @@ import isUrl from 'is-url';
 import imageExtensions from 'image-extensions';
 import { debounce } from 'lodash';
 import { isKeyHotkey } from 'is-hotkey';
+import Plain from 'slate-plain-serializer';
 
 import './doc-editor.scss';
 
@@ -23,9 +24,10 @@ class DocEditor extends React.Component {
 
     constructor(props) {
         super(props);
-        const { data } = props;
+        const { data, title } = props;
         this.state = {
-            value: Value.fromJSON(data)
+            value: Value.fromJSON(data),
+            title: Plain.deserialize(title)
         };
         this.debouncedUpdate = debounce(this.handleUpdate, 300);
     }
@@ -91,11 +93,12 @@ class DocEditor extends React.Component {
     };
 
     handleUpdate = () => {
-        const { value } = this.state;
+        const { value, title } = this.state;
         const updatedValue = value.toJSON();
+        const updatedTitle = Plain.serialize(title);
         const { nodes } = updatedValue.document;
         if (nodes.length > 0) {
-            this.props.onChange(updatedValue);
+            this.props.onChange(updatedValue, updatedTitle);
         }
     };
 
@@ -253,7 +256,6 @@ class DocEditor extends React.Component {
                 onDrop={this.onDropOrPaste}
                 onPaste={this.onDropOrPaste}
                 spellCheck
-                autoFocus
             />
         );
     };
@@ -275,7 +277,9 @@ class DocEditor extends React.Component {
                 return <ol {...attributes}>{children}</ol>;
             case 'image': {
                 const src = node.data.get('src');
-                const className = isSelected ? 'active' : null;
+                const className = isSelected
+                    ? 'img-responsive active'
+                    : 'img-responsive';
                 const style = { display: 'block' };
                 return (
                     <img
@@ -308,9 +312,29 @@ class DocEditor extends React.Component {
         }
     };
 
+    onTitleChange = ({ value }) => {
+        this.setState(
+            {
+                title: value
+            },
+            this.debouncedUpdate
+        );
+    };
+
+    renderTitleEditor = () => {
+        return (
+            <Editor
+                placeholder="Enter some rich text..."
+                value={this.state.title}
+                onChange={this.onTitleChange}
+            />
+        );
+    };
+
     render() {
         return (
             <div className="document-editor">
+                <div className="title-editor">{this.renderTitleEditor()}</div>
                 {this.renderToolbar()}
                 {this.renderEditor()}
             </div>

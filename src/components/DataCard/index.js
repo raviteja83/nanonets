@@ -9,26 +9,18 @@ class DataCard extends Component {
         const { history, id } = this.props;
         history.push(`/docs/${id}`);
     };
-    render() {
-        const { title, content, assets = {} } = this.props.data;
-        const assetsSize = Object.keys(assets).length;
 
+    render() {
+        const { id } = this.props;
         return (
             <div className="data-card" onClick={this.handleClick}>
-                <div className="data-card-title">{title}</div>
-                <div className="data-card-content">{content}</div>
-                {assetsSize > 0 && (
-                    <div className="data-card-attachments">
-                        <i className="fa fa-paperclip" /> {assetsSize}
-                    </div>
-                )}
+                <div className="data-card-title">{id}</div>
             </div>
         );
     }
 }
 
 DataCard.propTypes = {
-    data: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
     history: PropTypes.object.isRequired
 };
