@@ -1,0 +1,12 @@
+@mixin cell-overlay-tooltip {
+    &.in {
+        opacity: 1;
+        .tooltip-inner {
+            left: 40%;
+            position: relative;
+            text-align: left;
+            max-width: 174px;
+            padding: 8px;
+        }
+    }
+}

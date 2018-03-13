@@ -1,0 +1,12 @@
+//
+// SASS Resources
+// --------------------------------------------------
+// These are shared SASS resources imported in all files via sass-resources-loader.
+// Note: Do not import anything that outputs CSS. This file is only used to import variables and mixins.
+//
+
+// Make variables and mixins available when using CSS modules.
+@import '../variables';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/_variables';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/_mixins';
+@import '../mixins';

@@ -1,0 +1,6 @@
+// Remove WebKit-style focus
+
+@mixin remove-tab-focus() {
+    outline: none;
+    outline-offset: 0;
+}

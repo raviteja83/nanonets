@@ -1,0 +1,10 @@
+//
+// Bootstrap Customizations
+// ------------------------
+// This gets loaded after bootstrap variables is loaded.
+// Thus, you may customize Bootstrap variables based on the values established in the Bootstrap _variables.scss file.
+// Note, if bootstrap did not have derived values, it would not be necessary to have two config files for customizing bootstrap values.
+// If you want your bootstrap override value to apply to derived variable values, then place your customizations in pre-customizations.
+// If you want to be sure your changes don't affect other derived values, place the changes in customizations.scss.
+// If you are not sure, you can probably simply use customizations.scss and, if you have issues, see _variables.scss for derived values.
+//

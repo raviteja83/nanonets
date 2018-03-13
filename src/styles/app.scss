@@ -1,0 +1,29 @@
+//
+// App Stylesheet
+// --------------------------------------------------
+// Customize Bootstrap variables that get imported before the original Bootstrap variables.
+// Thus, derived Bootstrap variables can depend on values from here.
+// See the Bootstrap _variables.scss file for examples of derived Bootstrap variables.
+//
+
+// Core variables and mixins
+// Note: All variables and mixins are imported via sass-resources.scss along with twbs variables and mixins
+
+// Core CSS
+@import 'base/type';
+@import 'base/scaffolding';
+@import 'base/buttons';
+@import 'base/forms';
+// Components
+@import 'base/spinners';
+@import 'base/tags';
+
+// Utility classes
+@import 'base/utilities';
+
+//modals
+
+@import 'base/modals';
+
+// Page Styles
+@import 'page';

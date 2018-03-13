@@ -1,0 +1,37 @@
+//
+// Page Stylesheet
+// --------------------------------------------------
+// Add all global page styles here
+//
+@mixin addExtraPaddingAtScreenEdges() {
+    padding-left: $grid-gutter-width;
+    padding-right: $grid-gutter-width;
+}
+
+.container,
+.container-fluid {
+    .mt-page-header &,
+    [class*="page-"] > & {
+        @include addExtraPaddingAtScreenEdges;
+    }
+
+    .mt-navbar > & {
+        @include addExtraPaddingAtScreenEdges;
+
+        .navbar-right {
+            margin-right: -$grid-gutter-width;
+        }
+    }
+}
+
+// Disable Responsive Breakpoints
+.container,
+.container-fluid,
+body {
+    min-width: $container-large-desktop;
+}
+
+.gradient-loader-page-wrapper {
+    margin-top: 20px;
+    padding-left: 20px;
+}

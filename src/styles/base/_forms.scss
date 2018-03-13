@@ -1,0 +1,273 @@
+//
+// Forms
+// --------------------------------------------------
+
+// Common form controls
+//
+// Shared size and type resets for form controls. Apply `.form-control` to any
+// of the following form controls:
+//
+// select
+// textarea
+// input[type="text"]
+// input[type="password"]
+// input[type="datetime"]
+// input[type="datetime-local"]
+// input[type="date"]
+// input[type="month"]
+// input[type="time"]
+// input[type="week"]
+// input[type="number"]
+// input[type="email"]
+// input[type="url"]
+// input[type="search"]
+// input[type="tel"]
+// input[type="color"]
+
+.form-control {
+    @include box-shadow(none);
+    @include remove-webkit-style-focus;
+    transition: all 0.15s ease-in-out;
+    line-height: 1.3; // ~ 18px
+
+    // Disabled and read-only inputs
+    //
+    // HTML5 says that controls under a fieldset > legend:first-child won't be
+    // disabled if the fieldset is disabled. Due to implementation difficulty, we
+    // don't honor that edge case; we style them as disabled anyway.
+    &[disabled],
+    &[readonly],
+    fieldset[disabled] & {
+        background-color: $input-bg-disabled;
+        color: $input-color-disabled;
+        opacity: 1; // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
+    }
+
+    &.form-control-gray {
+        background-color: $form-control-gray-bg;
+
+        &:focus {
+            background-color: $white;
+        }
+    }
+}
+
+// Search
+.mt-search {
+    position: relative;
+
+    .search-icon {
+        color: $gray-light;
+        font-size: 1em;
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        margin-top: -7px;
+    }
+
+    .form-control {
+        padding-left: 30px;
+
+        &.form-control-gray {
+            border-color: transparent;
+
+            &:focus {
+                border-color: $input-border-focus;
+            }
+        }
+
+        &.input-sm {
+            padding-left: 25px;
+            font-size: $font-size-small;
+
+            + .search-icon {
+                font-size: 11px;
+                margin-top: -5px;
+                left: 7px;
+            }
+        }
+
+        &.input-lg {
+            padding-left: 34px;
+
+            + .search-icon {
+                left: 12px;
+            }
+        }
+    }
+}
+
+// Form control feedback states
+//
+// Apply contextual and semantic states to individual form controls.
+
+// Feedback states
+.has-success {
+    @include form-control-validation($brand-success, $brand-success, transparent, transparent, $brand-success, $input-color);
+}
+.has-warning {
+    @include form-control-validation($brand-warning, $brand-warning, transparent, transparent, $brand-warning, $input-color);
+}
+.has-error {
+    @include form-control-validation($brand-danger, $brand-danger, transparent, transparent, $brand-danger, $input-color);
+}
+
+// Form control sizing
+//
+// Build on `.form-control` with modifier classes to decrease or increase the
+// height and font-size of form controls.
+//
+// The `.form-group-* form-control` variations are sadly duplicated to avoid the
+// issue documented in https://github.com/twbs/bootstrap/issues/15074.
+
+@include input-size('.input-sm', $input-height-small, $padding-small-vertical, $padding-small-horizontal, $font-size-xs, $input-sm-line-height, $input-border-radius-small);
+.form-group-sm {
+    .form-control {
+        font-size: $font-size-xs;
+        line-height: $input-sm-line-height;
+    }
+    select.form-control {
+        height: $input-height-small;
+        line-height: $input-sm-line-height;
+    }
+    textarea.form-control,
+    select[multiple].form-control {
+        height: auto;
+    }
+    .form-control-static {
+        height: $input-height-small;
+        min-height: ($line-height-computed + $font-size-small);
+        padding: ($padding-small-vertical + 1) $padding-small-horizontal;
+        font-size: $font-size-xs;
+        line-height: $input-sm-line-height;
+    }
+}
+
+@include input-size('.input-lg', $input-height-large, $padding-large-vertical, $padding-large-horizontal, $font-size-base, $input-lg-line-height, $input-border-radius-large);
+.form-group-lg {
+    .form-control {
+        font-size: $font-size-base;
+        line-height: $input-lg-line-height;
+    }
+    select.form-control {
+        height: $input-height-large;
+        line-height: $input-lg-line-height;
+    }
+    textarea.form-control,
+    select[multiple].form-control {
+        height: auto;
+    }
+    .form-control-static {
+        min-height: ($line-height-computed + $font-size-base);
+        font-size: $font-size-base;
+        line-height: $input-lg-line-height;
+    }
+}
+
+// MailTech Checkbox
+.mt-checkbox {
+    input[type="checkbox"] {
+        @include sr-only();
+    }
+
+    label {
+        &:before {
+            content: "\f096";
+            @include font-awesome-icons-base-properties(true, 1.1em);
+            color: $mt-checkbox-unchecked-color;
+            margin-left: -20px; // same as .label padding
+            margin-right: 4px; // adjust margin for better spacing
+            margin-top: -1px; //todo-h: quick hack to fix vertical positioning. resolve later.
+            height: 1em;
+            width: 1em;
+            cursor: pointer;
+            vertical-align: middle;
+            transition: all 0.4s ease;
+        }
+
+        &:hover {
+            &:before {
+                color: $mt-checkbox-unchecked-hover-color;
+            }
+        }
+    }
+
+    input[type="checkbox"]:checked + label {
+        &:before {
+            content: "\f14a";
+            color: $mt-checkbox-checked-color;
+        }
+    }
+
+    input[type="checkbox"]:disabled + label {
+        &:before {
+            color: $mt-checkbox-disabled-color;
+            cursor: not-allowed;
+        }
+    }
+
+    &.mt-checkbox-circle {
+        label {
+            &:before {
+                content: "\f10c";
+                color: $mt-checkbox-circle-unchecked-color;
+            }
+
+            &:hover {
+                &:before {
+                    color: $mt-checkbox-unchecked-hover-color;
+                }
+            }
+        }
+
+        input[type="checkbox"]:checked + label {
+            &:before {
+                content: "\f058";
+                color: $mt-checkbox-circle-checked-color;
+            }
+        }
+    }
+}
+
+// MailTech Radio
+.mt-radio {
+    input[type="radio"] {
+        @include sr-only();
+    }
+
+    label {
+        &:before {
+            content: "\f10c";
+            @include font-awesome-icons-base-properties(true, 1.1em);
+            color: $mt-radio-unchecked-color;
+            margin-left: -20px; // same as .label padding
+            margin-right: 4px; // adjust margin for better spacing
+            margin-top: -1px; //todo-h: quick hack to fix vertical positioning. resolve later.
+            cursor: pointer;
+            height: 1em;
+            width: 1em;
+            vertical-align: middle;
+            transition: all 0.4s ease;
+        }
+
+        &:hover {
+            &:before {
+                color: $mt-radio-unchecked-hover-color;
+            }
+        }
+    }
+
+    input[type="radio"]:checked + label {
+        &:before {
+            content: "\f192";
+            color: $mt-radio-checked-color;
+        }
+    }
+
+    input[type="radio"]:disabled + label {
+        &:before {
+            color: $mt-radio-disabled-color;
+            cursor: not-allowed;
+        }
+    }
+}

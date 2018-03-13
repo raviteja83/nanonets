@@ -1,0 +1,121 @@
+//
+// Typography
+// --------------------------------------------------
+
+// Headings
+// -------------------------
+
+h1,
+.h1 {
+    font-weight: $font-weight-h1;
+    line-height: $line-height-h1;
+}
+
+h2,
+.h2 {
+    font-weight: $font-weight-h2;
+    line-height: $line-height-h2;
+}
+
+h3,
+.h3 {
+    font-weight: $font-weight-h3;
+    line-height: $line-height-h3;
+}
+
+h4,
+.h4 {
+    font-weight: $font-weight-h4;
+    line-height: $line-height-h4;
+}
+
+h5,
+.h5 {
+    font-weight: $font-weight-h5;
+    line-height: $line-height-h5;
+}
+
+h6,
+.h6 {
+    font-weight: $font-weight-h6;
+    line-height: $line-height-h6;
+}
+
+.subheader {
+    font-size: $font-size-h3;
+}
+
+// Body text
+// -------------------------
+
+.text-base {
+    font-size: $font-size-base;
+}
+.text-large {
+    font-size: $font-size-large;
+}
+.text-small {
+    font-size: $font-size-small;
+}
+.text-xs {
+    font-size: $font-size-xs;
+}
+
+// Emphasis & misc
+// -------------------------
+
+// Contextual colors
+@include text-emphasis-variant('.text-secondary', $brand-secondary);
+@include text-emphasis-variant('.text-success', $brand-success);
+@include text-emphasis-variant('.text-info', $brand-info);
+@include text-emphasis-variant('.text-warning', $brand-warning);
+@include text-emphasis-variant('.text-danger', $brand-danger);
+@include text-emphasis-variant('.text-gray', $gray);
+@include text-emphasis-variant('.text-gray-light', $gray-light);
+@include text-emphasis-variant('.text-gray-lighter', $gray-lighter);
+@include text-emphasis-variant('.text-gray-lightest', $gray-lightest);
+@include text-emphasis-variant('.text-gray-dark', $gray-dark);
+@include text-emphasis-variant('.text-gray-darker', $gray-darker);
+@include text-emphasis-variant('.text-black', $black);
+@include text-emphasis-variant('.text-white', $white);
+
+// Contextual backgrounds
+@include bg-variant('.bg-secondary', $brand-secondary);
+@include bg-variant('.bg-success', $brand-success);
+@include bg-variant('.bg-info', $brand-info);
+@include bg-variant('.bg-warning', $brand-warning);
+@include bg-variant('.bg-danger', $brand-danger);
+@include bg-variant('.bg-gray', $gray);
+@include bg-variant('.bg-gray-light', $gray-light);
+@include bg-variant('.bg-gray-lighter', $gray-lighter);
+@include bg-variant('.bg-gray-lightest', $gray-lightest);
+@include bg-variant('.bg-gray-dark', $gray-dark);
+@include bg-variant('.bg-gray-darker', $gray-darker);
+@include bg-variant('.bg-black', $black);
+@include bg-variant('.bg-white', $white);
+
+// Page header
+// -------------------------
+
+.mt-page-header {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    background: $white;
+    box-shadow: $standard-box-shadow;
+    position: relative;
+    z-index: 1;
+
+    h1 {
+        color: $brand-secondary;
+        margin: 0;
+    }
+}
+
+// Highlighted Text <mark>
+// -------------------------
+
+.highlight-text {
+    background-color: yellow;
+    color: inherit;
+    padding: 0;
+}

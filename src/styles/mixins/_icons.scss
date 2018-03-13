@@ -1,0 +1,28 @@
+// FontAwesome Icons Base Properties
+// --------------------------------------------------
+// Mixin to add .fa class properties when using icons via CSS.
+//
+
+@mixin font-awesome-icons-base-properties($font-size-override: false, $font-size-base: 1em) {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @if ($font-size-override == true) {
+        font-size: $font-size-base;
+    }
+}
+
+@mixin mt-icons-base-properties($font-size-override: false, $font-size-base: 1em) {
+    display: inline-block;
+    font: normal normal normal 14px/1 mt-icons-ai;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @if ($font-size-override == true) {
+        font-size: $font-size-base;
+    }
+}

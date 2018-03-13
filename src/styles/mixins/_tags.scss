@@ -1,0 +1,42 @@
+// Tag variants
+//
+// Easily pump out default styles for all tags
+
+@mixin tag-variant($color, $background, $dismissible: false, $hover-color: $color, $hover-bg: $background) {
+    @if $dismissible {
+        background-color: $background;
+        color: $color;
+
+        &:hover {
+            background-color: $hover-bg;
+            color: $hover-color;
+            cursor: pointer;
+            text-decoration: line-through;
+        }
+
+        &:after {
+            content: '\f00d';
+            font-family: $icon-font-family;
+            display: inline-block;
+            vertical-align: middle;
+            padding-left: 8px;
+            font-weight: 100;
+            line-height: 1;
+            font-size: 0.8em;
+        }
+    }
+
+    @else {
+        background-color: $background;
+        color: $color;
+    }
+}
+
+
+@mixin tag-size($padding, $font-size, $font-weight, $line-height, $border-radius) {
+    padding: $padding;
+    font-size: $font-size;
+    line-height: $line-height;
+    font-weight: $font-weight;
+    border-radius: $border-radius;
+}

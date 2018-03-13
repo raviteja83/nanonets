@@ -1,0 +1,738 @@
+//
+// App + Bootstrap Variables
+// --------------------------------------------------
+// Customize Bootstrap variables that get imported before the original Bootstrap variables.
+// Thus, derived Bootstrap variables can depend on values from here.
+// See the Bootstrap _variables.scss file for examples of derived Bootstrap variables.
+// Note: Use bootstrap sass comment convention Eg: //== BlockName
+//
+
+$bootstrap-sass-asset-helper: false;
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+$gray-base: #000; // not used anymore. was required by twbs for calculating gray variants via lighten().
+$gray-darker: #222;
+$gray-dark: #333;
+$gray: #555;
+$gray-light: #777;
+$gray-lighter: #999;
+$gray-lightest: #f2f2f2;
+$white: #fff;
+$black: #000;
+
+$brand-primary: #009dd6;
+$brand-primary-light: #55acee;
+$brand-secondary: #345172;
+$brand-success: #22cc77;
+$brand-info: #55aadd;
+$brand-warning: #ffaa00;
+$brand-danger: #ff2200;
+$brand-disable: #c7c7c7;
+$brand-blue-accent: #5d8bbf;
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+//** Background color for `<body>`.
+$body-bg: #fff;
+//** Global text color on `<body>`.
+$text-color: $gray;
+
+//** Global textual link color.
+$link-color: $brand-primary;
+//** Link hover color set via `darken()` function.
+$link-hover-color: $brand-secondary;
+//** Link hover decoration.
+$link-hover-decoration: underline;
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+//** Common weight-name mapping
+$font-weight-thin: 100;
+$font-weight-extra-light: 200;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-extra-bold: 800;
+$font-weight-black: 900;
+// Relative to the parent
+$font-weight-lighter: lighter;
+$font-weight-bolder: bolder;
+
+$font-family-sans-serif: 'Lato', Helvetica, Arial, sans-serif;
+$font-family-serif: Georgia, "Times New Roman", Times, serif;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+$font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-base: $font-family-sans-serif;
+
+$font-size-base: 14px;
+$font-size-large: 16px;
+$font-size-small: 12px;
+$font-size-xs: 10px;
+
+$font-size-h1: 30px;
+$font-size-h2: 24px;
+$font-size-h3: 18px;
+$font-size-h4: 14px;
+$font-size-h5: 12px;
+$font-size-h6: 10px;
+
+$font-weight-h1: $font-weight-black;
+$font-weight-h2: $font-weight-black;
+$font-weight-h3: $font-weight-bold;
+$font-weight-h4: $font-weight-bold;
+$font-weight-h5: $font-weight-bold;
+$font-weight-h6: $font-weight-normal;
+
+$line-height-h1: 34px;
+$line-height-h2: 30px;
+$line-height-h3: 21px;
+$line-height-h4: 18px;
+$line-height-h5: 12px;
+$line-height-h6: 10px;
+
+//** Unit-less `line-height` for use in components like buttons.
+$line-height-base: 1.428571429; // 20/14
+//** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+$line-height-computed: floor(($font-size-base * $line-height-base)); // ~20px
+
+//** By default, this inherits from the `<body>`.
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: 500;
+$headings-line-height: 1.1;
+$headings-color: inherit;
+
+//== Iconography
+//
+//## Specify custom location and filename of the included Glyphicons icon font. Useful for those including Bootstrap via Bower.
+
+//** Load fonts from this directory.
+
+// [converter] If $bootstrap-sass-asset-helper if used, provide path relative to the assets load path.
+// [converter] This is because some asset helpers, such as Sprockets, do not work with file-relative paths.
+$icon-font-path: if(
+    $bootstrap-sass-asset-helper,
+    "bootstrap/",
+    "../fonts/bootstrap/"
+);
+
+//** File name for all font files.
+$icon-font-name: "glyphicons-halflings-regular";
+//** Element ID within SVG icon file.
+$icon-font-svg-id: "glyphicons_halflingsregular";
+
+//** Font Awesome
+$icon-font-family: "FontAwesome";
+
+//** MailTech Icon Font
+$icon-mt-font-path: "fonts";
+
+//== Components
+//
+//## Define common padding and border radius sizes and more. Values based on 14px text and 1.428 line-height (~20px to start).
+
+$padding-base-vertical: 6px;
+$padding-base-horizontal: 12px;
+
+$padding-large-vertical: 10px;
+$padding-large-horizontal: 16px;
+
+$padding-small-vertical: 4px;
+$padding-small-horizontal: 10px;
+
+$padding-xs-vertical: 1px;
+$padding-xs-horizontal: 5px;
+
+$line-height-large: 1.3333333; // extra decimals for Win 8.1 Chrome
+$line-height-small: 1.5;
+
+$border-radius-base: 3px;
+$border-radius-large: 4px;
+$border-radius-small: 2px;
+
+//** Global color for active items (e.g., navs or dropdowns).
+$component-active-color: #fff;
+//** Global background color for active items (e.g., navs or dropdowns).
+$component-active-bg: $brand-primary;
+
+//** Width of the `border` for generating carets that indicate dropdowns.
+$caret-width-base: 4px;
+//** Carets increase slightly in size for larger components.
+$caret-width-large: 5px;
+
+//== Tables
+//
+//## Customizes the `.table` component with basic values, each used across all table variations.
+
+//** Padding for `<th>`s and `<td>`s.
+$table-cell-padding: 8px;
+//** Padding for cells in `.table-condensed`.
+$table-condensed-cell-padding: 5px;
+
+//** Default background color used for all tables.
+$table-bg: transparent;
+//** Background color used for `.table-striped`.
+$table-bg-accent: #f9f9f9;
+//** Background color used for `.table-hover`.
+$table-bg-hover: #f5f5f5;
+$table-bg-active: $table-bg-hover;
+
+//** Border color for table and cell borders.
+$table-border-color: #ddd;
+
+//== Buttons
+//
+//## For each of Bootstrap's buttons, define text, background and border color.
+
+$btn-font-weight: $font-weight-bold;
+
+$btn-default-color: $gray-dark;
+$btn-default-bg: $white;
+$btn-default-border: $white;
+
+$btn-primary-color: $white;
+$btn-primary-bg: $brand-primary;
+$btn-primary-border: $brand-primary;
+$btn-primary-bg-hover: #0089bb;
+$btn-primary-bg-focus: $btn-primary-bg-hover;
+$btn-primary-bg-active: #0075a0;
+
+$btn-create-padding: 0px;
+$btn-create-font-size: 30px; // '+' font size
+$btn-create-line-height: 1;
+$btn-create-width: 32px;
+$btn-create-height: 32px;
+
+$btn-hollow-white-color: $white;
+$btn-hollow-white-border: rgba($white, 0.30);
+
+$btn-hollow-primary-color: $brand-primary;
+$btn-hollow-primary-border: $brand-primary;
+
+$btn-hollow-gray-color: $gray;
+$btn-hollow-gray-border: rgba($black, 0.30);
+
+$btn-hollow-white-color: $white;
+$btn-hollow-white-bg: transparent;
+$btn-hollow-white-border: rgba($white, 0.30);
+
+$btn-success-color: #fff;
+$btn-success-bg: $brand-success;
+$btn-success-border: $brand-success;
+
+$btn-info-color: #fff;
+$btn-info-bg: $brand-info;
+$btn-info-border: $brand-info;
+
+$btn-warning-color: #fff;
+$btn-warning-bg: $brand-warning;
+$btn-warning-border: $brand-warning;
+
+$btn-danger-color: #fff;
+$btn-danger-bg: $brand-danger;
+$btn-danger-border: $brand-danger;
+
+$btn-link-disabled-color: $gray-light;
+
+// Button Sizes
+$btn-3lg-padding-vertical: 19px;
+$btn-3lg-padding-horizontal: 40px;
+$btn-3lg-font-size: 16px;
+$btn-3lg-line-height: 18px;
+$btn-3lg-border-radius: $border-radius-base;
+
+$btn-2lg-padding-vertical: 14px;
+$btn-2lg-padding-horizontal: 30px;
+$btn-2lg-font-size: 14px;
+$btn-2lg-line-height: 18px;
+$btn-2lg-border-radius: $border-radius-base;
+
+$btn-lg-padding-vertical: 9px;
+$btn-lg-padding-horizontal: 20px;
+$btn-lg-font-size: 14px;
+$btn-lg-line-height: 18px;
+$btn-lg-border-radius: $border-radius-base;
+
+$btn-base-padding-vertical: 6px;
+$btn-base-padding-horizontal: 14px;
+$btn-base-font-size: 14px;
+$btn-base-line-height: 18px;
+$btn-base-border-radius: $border-radius-base;
+
+$btn-sm-padding-vertical: 4px;
+$btn-sm-padding-horizontal: 9px;
+$btn-sm-font-size: 12px;
+$btn-sm-line-height: 14px;
+$btn-sm-border-radius: $border-radius-small;
+
+$btn-xs-padding-vertical: 2px;
+$btn-xs-padding-horizontal: 9px;
+$btn-xs-font-size: 10px;
+$btn-xs-line-height: 14px;
+$btn-xs-border-radius: $border-radius-small;
+
+//== Modals
+//
+//##
+
+//** Padding applied to the modal body
+$modal-inner-padding: 15px;
+
+//** Padding applied to the modal title
+$modal-title-padding: 30px;
+$modal-title-padding-medium: 20px;
+$modal-title-padding-small: 15px;
+//** Modal title line-height
+$modal-title-line-height: $line-height-base;
+
+//** Background color of modal content area
+$modal-content-bg: #fff;
+//** Modal content border color
+$modal-content-border-color: rgba($black, .2);
+//** Modal content border color **for IE8**
+$modal-content-fallback-border-color: #999;
+
+//** Modal backdrop background color
+$modal-backdrop-bg: #000;
+//** Modal backdrop opacity
+$modal-backdrop-opacity: .9;
+//** Modal header border color
+$modal-header-border-color: $gray-lightest;
+//** Modal footer border color
+$modal-footer-border-color: $modal-header-border-color;
+
+$modal-lg: 900px;
+$modal-md: 600px;
+$modal-sm: 300px;
+
+//== Forms
+//
+//##
+
+//** `<input>` background color
+$input-bg: #fff;
+//** `<input disabled>` background color
+$input-bg-disabled: #f6f6f6;
+$input-color-disabled: $gray-lighter;
+
+//** Text color for `<input>`s
+$input-color: $gray;
+//** `<input>` border color
+$input-border: rgba($black, 0.30);
+
+// TODO: Rename `$input-border-radius` to `$input-border-radius-base` in v4
+//** Default `.form-control` border radius
+// This has no effect on `<select>`s in some browsers, due to the limited stylability of `<select>`s in CSS.
+$input-border-radius: $border-radius-base;
+//** Large `.form-control` border radius
+$input-border-radius-large: $border-radius-base;
+//** Small `.form-control` border radius
+$input-border-radius-small: $border-radius-base;
+
+//** Override input line-height as per design
+$input-sm-line-height: 1.3;
+$input-lg-line-height: 1.3;
+
+//** Border color for inputs on focus
+$input-border-focus: $brand-primary-light;
+
+//** Placeholder text color
+$input-color-placeholder: $gray-lighter;
+
+//** Default `.form-control` height
+$input-height-base: (
+    $line-height-computed + ($padding-base-vertical * 2)
+); // 32px
+//** Large `.form-control` height
+$input-height-large: 40px; // deleted computed value
+//** Small `.form-control` height
+$input-height-small: 24px; // deleted computed value
+
+//** `.form-group` margin
+$form-group-margin-bottom: 15px;
+
+$legend-color: $gray-dark;
+$legend-border-color: #e5e5e5;
+
+//** Background color for textual input addons
+$input-group-addon-bg: $gray-lighter;
+//** Border color for textual input addons
+$input-group-addon-border-color: $input-border;
+
+//** .form-control-gray background
+$form-control-gray-bg: $gray-lightest;
+
+//** Disabled cursor for form controls and buttons.
+$cursor-disabled: not-allowed;
+
+//** MailTech Radio
+$mt-radio-checked-color: $brand-primary;
+$mt-radio-unchecked-color: rgba($black, 0.20);
+$mt-radio-unchecked-hover-color: $mt-radio-checked-color;
+$mt-radio-disabled-color: rgba($black, 0.10);
+
+//** MailTech Checkbox
+$mt-checkbox-checked-color: $brand-primary;
+$mt-checkbox-unchecked-color: rgba($black, 0.20);
+$mt-checkbox-unchecked-hover-color: $mt-checkbox-checked-color;
+$mt-checkbox-disabled-color: rgba($black, 0.10);
+$mt-checkbox-circle-checked-color: $brand-primary;
+$mt-checkbox-circle-unchecked-color: $white;
+$mt-checkbox-circle-unchecked-hover-color: $gray-lightest;
+
+//== Dropdowns
+//
+//## Dropdown menu container and contents.
+
+//** Background for the dropdown menu.
+$dropdown-bg: #fff;
+//** Dropdown menu `border-color`.
+$dropdown-border: rgba($black, .15);
+//** Dropdown menu `border-color` **for IE8**.
+$dropdown-fallback-border: $input-border;
+//** Divider color for between dropdown items.
+$dropdown-divider-bg: #e5e5e5;
+
+//** Dropdown link text color.
+$dropdown-link-color: $gray;
+//** Hover color for dropdown links.
+$dropdown-link-hover-color: darken($gray-dark, 5%);
+//** Hover background for dropdown links.
+$dropdown-link-hover-bg: rgba($black, 0.05);
+
+//** Active dropdown menu item text color.
+$dropdown-link-active-color: $component-active-color;
+//** Active dropdown menu item background color.
+$dropdown-link-active-bg: $component-active-bg;
+
+//** Disabled dropdown menu item background color.
+$dropdown-link-disabled-color: $gray-light;
+
+//** Text color for headers within dropdown menus.
+$dropdown-header-color: $gray-light;
+
+//** Deprecated `$dropdown-caret-color` as of v3.1.0
+$dropdown-caret-color: #000;
+
+//-- Z-index master list
+//
+// Warning: Avoid customizing these values. They're used for a bird's eye view
+// of components dependent on the z-axis and are designed to all work together.
+//
+// Note: These variables are not generated into the Customizer.
+
+$zindex-navbar: 1000;
+$zindex-dropdown: 1000;
+$zindex-popover: 1060;
+$zindex-tooltip: 1070;
+$zindex-navbar-fixed: 1030;
+$zindex-modal-background: 1040;
+$zindex-modal: 1050;
+
+//== Media queries breakpoints
+//
+//## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+
+// Extra small screen / phone
+//** Deprecated `$screen-xs` as of v3.0.1
+$screen-xs: 480px;
+//** Deprecated `$screen-xs-min` as of v3.2.0
+$screen-xs-min: $screen-xs;
+//** Deprecated `$screen-phone` as of v3.0.1
+$screen-phone: $screen-xs-min;
+
+// Small screen / tablet
+//** Deprecated `$screen-sm` as of v3.0.1
+$screen-sm: 768px;
+$screen-sm-min: $screen-sm;
+//** Deprecated `$screen-tablet` as of v3.0.1
+$screen-tablet: $screen-sm-min;
+
+// Medium screen / desktop
+//** Deprecated `$screen-md` as of v3.0.1
+$screen-md: 992px;
+$screen-md-min: $screen-md;
+//** Deprecated `$screen-desktop` as of v3.0.1
+$screen-desktop: $screen-md-min;
+
+// Large screen / wide desktop
+//** Deprecated `$screen-lg` as of v3.0.1
+$screen-lg: 1280px;
+$screen-lg-min: $screen-lg;
+//** Deprecated `$screen-lg-desktop` as of v3.0.1
+$screen-lg-desktop: $screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
+
+//== Grid system
+//
+//## Define your custom responsive grid.
+
+//** Number of columns in the grid.
+$grid-columns: 12;
+//** Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width: 20px;
+// Navbar collapse
+//** Point at which the navbar becomes uncollapsed.
+$grid-float-breakpoint: 0;
+//** Point at which the navbar begins collapsing.
+$grid-float-breakpoint-max: ($grid-float-breakpoint - 1);
+
+//== Container sizes
+//
+//## Define the maximum width of `.container` for different screen sizes.
+
+// Small screen / tablet
+$container-tablet: (720px + $grid-gutter-width);
+//** For `$screen-sm-min` and up.
+$container-sm: $container-tablet;
+
+// Medium screen / desktop
+$container-desktop: (940px + $grid-gutter-width);
+//** For `$screen-md-min` and up.
+$container-md: $container-desktop;
+
+// Large screen / wide desktop
+$container-large-desktop: (1260px + $grid-gutter-width);
+//** For `$screen-lg-min` and up.
+$container-lg: $container-large-desktop;
+
+//== Navbar
+//
+//##
+
+// Basics of a navbar
+$navbar-height: 60px;
+$navbar-margin-bottom: $line-height-computed;
+$navbar-border-radius: 0;
+$navbar-padding-horizontal: floor(($grid-gutter-width / 2));
+$navbar-padding-vertical: (($navbar-height - $line-height-computed) / 2);
+$navbar-collapse-max-height: 340px;
+
+$navbar-default-color: #777;
+$navbar-default-bg: #2a3440;
+$navbar-default-border: darken($navbar-default-bg, 6.5%);
+
+// Navbar links
+$navbar-default-link-color: #888e95;
+$navbar-default-link-hover-color: #fff;
+$navbar-default-link-hover-bg: transparent;
+$navbar-default-link-active-color: #fff;
+$navbar-default-link-active-bg: darken($navbar-default-bg, 6.5%);
+$navbar-default-link-disabled-color: #ccc;
+$navbar-default-link-disabled-bg: transparent;
+
+// Navbar brand label
+$navbar-default-brand-color: $navbar-default-link-color;
+$navbar-default-brand-hover-color: darken($navbar-default-brand-color, 10%);
+$navbar-default-brand-hover-bg: transparent;
+
+// Navbar toggle
+$navbar-default-toggle-hover-bg: #ddd;
+$navbar-default-toggle-icon-bar-bg: #888;
+$navbar-default-toggle-border-color: #ddd;
+
+//=== Inverted navbar
+// Reset inverted navbar basics
+$navbar-inverse-color: lighten($gray-light, 15%);
+$navbar-inverse-bg: #222;
+$navbar-inverse-border: darken($navbar-inverse-bg, 10%);
+
+// Inverted navbar links
+$navbar-inverse-link-color: lighten($gray-light, 15%);
+$navbar-inverse-link-hover-color: #fff;
+$navbar-inverse-link-hover-bg: transparent;
+$navbar-inverse-link-active-color: $navbar-inverse-link-hover-color;
+$navbar-inverse-link-active-bg: darken($navbar-inverse-bg, 10%);
+$navbar-inverse-link-disabled-color: #444;
+$navbar-inverse-link-disabled-bg: transparent;
+
+// Inverted navbar brand label
+$navbar-inverse-brand-color: $navbar-inverse-link-color;
+$navbar-inverse-brand-hover-color: #fff;
+$navbar-inverse-brand-hover-bg: transparent;
+
+// Inverted navbar toggle
+$navbar-inverse-toggle-hover-bg: #333;
+$navbar-inverse-toggle-icon-bar-bg: #fff;
+$navbar-inverse-toggle-border-color: #333;
+
+//== Navs
+//
+//##
+
+//=== Shared nav styles
+$nav-link-padding: 10px 15px;
+$nav-link-hover-bg: $gray-lighter;
+
+$nav-disabled-link-color: $gray-light;
+$nav-disabled-link-hover-color: $gray-light;
+
+//== Tabs
+$nav-tabs-border-color: #ddd;
+
+$nav-tabs-link-hover-border-color: $gray-lighter;
+
+$nav-tabs-active-link-hover-bg: $body-bg;
+$nav-tabs-active-link-hover-color: $gray;
+$nav-tabs-active-link-hover-border-color: #ddd;
+
+$nav-tabs-justified-link-border-color: #ddd;
+$nav-tabs-justified-active-link-border-color: $body-bg;
+
+//== Pills
+$nav-pills-border-radius: $border-radius-base;
+$nav-pills-active-link-hover-bg: $component-active-bg;
+$nav-pills-active-link-hover-color: $component-active-color;
+
+//== Type
+//
+//##
+
+//** Horizontal offset for forms and lists.
+$component-offset-horizontal: 180px;
+//** Text muted color
+$text-muted: $gray-light;
+//** Abbreviations and acronyms border color
+$abbr-border-color: $gray-light;
+//** Headings small color
+$headings-small-color: $gray-light;
+//** Blockquote small color
+$blockquote-small-color: $gray-light;
+//** Blockquote font size
+$blockquote-font-size: ($font-size-base * 1.25);
+//** Blockquote border color
+$blockquote-border-color: $gray-lighter;
+//** Page header border color
+$page-header-border-color: $gray-lighter;
+//** Width of horizontal description list titles
+$dl-horizontal-offset: $component-offset-horizontal;
+//** Point at which .dl-horizontal becomes horizontal
+$dl-horizontal-breakpoint: $grid-float-breakpoint;
+//** Horizontal line color.
+$hr-border: $gray-lighter;
+
+//== Tags
+//
+//## Define text, bg, padding for all tag variants
+
+$tag-color: $white;
+$tag-bg: $gray-lighter;
+
+$tag-light-color: $gray-light;
+$tag-light-bg: $gray-lightest;
+
+$tag-primary-color: $brand-primary;
+$tag-primary-bg: rgba(
+    0,
+    157,
+    214,
+    0.2
+); // $brand-primary with 20% alpha opacity
+$tag-primary-hover-color: $white;
+$tag-primary-hover-bg: $brand-primary;
+
+$tag-secondary-color: $white;
+$tag-secondary-bg: $brand-secondary;
+
+$tag-success-color: $white;
+$tag-success-bg: $brand-success;
+
+$tag-info-color: $white;
+$tag-info-bg: $brand-info;
+
+$tag-warning-color: $white;
+$tag-warning-bg: $brand-warning;
+
+$tag-danger-color: $white;
+$tag-danger-bg: $brand-danger;
+
+//** Base Size
+$tag-border-radius: $border-radius-base;
+$tag-font-size: $font-size-xs;
+$tag-padding: 4px 8px;
+$tag-line-height: 12px;
+$tag-font-weight: $font-weight-normal;
+
+//** Tag Large
+$tag-lg-border-radius: $border-radius-base;
+$tag-lg-font-size: $font-size-xs;
+$tag-lg-padding: 6px 8px;
+$tag-lg-line-height: 13px;
+$tag-lg-font-weight: $font-weight-normal;
+
+//** Tag Small
+$tag-sm-border-radius: $border-radius-base;
+$tag-sm-font-size: $font-size-xs;
+$tag-sm-padding: 3px 8px;
+$tag-sm-line-height: 12px;
+$tag-sm-font-weight: $font-weight-normal;
+
+//** Tag xs
+$tag-xs-border-radius: $border-radius-base;
+$tag-xs-font-size: $font-size-xs;
+$tag-xs-padding: 1px 5px;
+$tag-xs-line-height: 12px;
+$tag-xs-font-weight: $font-weight-black;
+
+//== Tooltips
+//
+//##
+
+//** Tooltip max width
+$tooltip-max-width: 200px;
+//** Tooltip text color
+$tooltip-color: $white;
+//** Tooltip background color
+$tooltip-bg: $gray-lighter;
+$tooltip-opacity: .9;
+
+//** Tooltip arrow width
+$tooltip-arrow-width: 5px;
+//** Tooltip arrow color
+$tooltip-arrow-color: $tooltip-bg;
+
+//== Box Shadow
+//
+//## Standard Box Shadow
+$standard-box-shadow: 0 0 1px 0 rgba($black, 0.30);
+
+//== Global Page Styles
+//
+//## Styles that apply to all pages
+$left-column-max-width: 260px;
+
+//== Subscribers
+//
+//## Subscriber page specific variables
+$subscribers-box-shadow: $standard-box-shadow;
+
+//== Utilities
+//
+//## utils.scss
+
+//** Margin Utility Classes
+$util-margin-start: 0;
+$util-margin-end: 61;
+$util-margin-counter: 5;
+
+//** Padding Utility Classes
+$util-padding-start: 0;
+$util-padding-end: 61;
+$util-padding-counter: 5;
+
+//== Miscellaneous
+//
+//##
+$section-divider-color: rgba($black, 0.1);

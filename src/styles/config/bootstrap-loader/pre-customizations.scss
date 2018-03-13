@@ -1,0 +1,11 @@
+//
+// Bootstrap Pre-Customizations
+// --------------------------------------------------
+// Customize Bootstrap variables that get imported before the original Bootstrap variables.
+// Thus, derived Bootstrap variables can depend on values from here.
+// See the Bootstrap _variables.scss file for examples of derived Bootstrap variables.
+//
+
+// All app + bootstrap variables are placed in one file as all app variables depend on bootstrap variables.
+@import "../../variables";
+@import "../../mixins";

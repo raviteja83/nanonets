@@ -1,0 +1,9 @@
+//
+// Scaffolding
+// --------------------------------------------------
+
+a {
+    &:focus {
+        @include remove-tab-focus
+    }
+}

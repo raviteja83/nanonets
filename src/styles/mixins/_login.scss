@@ -1,0 +1,13 @@
+@mixin loginLabelCommonStyles() {
+    font-size: 12px;
+    left: 0;
+    top: -6px;
+}
+
+@mixin loginShowPasswordCommonStyles() {
+    font-size: 22px;
+    position: absolute;
+    right: 10px;
+    bottom: 12px;
+    cursor: pointer;
+}

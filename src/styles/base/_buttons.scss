@@ -1,0 +1,164 @@
+//
+// Buttons
+// --------------------------------------------------
+
+// Base styles
+// --------------------------------------------------
+
+.btn {
+    font-weight: $btn-font-weight;
+    @include button-size($btn-base-padding-vertical, $btn-base-padding-horizontal, $btn-base-font-size, $btn-base-line-height, $btn-base-border-radius);
+    transition: all 0.3s ease;
+
+    &,
+    &:active,
+    &.active {
+        &:focus,
+        &.focus {
+            @include remove-tab-focus;
+        }
+    }
+
+    &:active,
+    &.active {
+        @include box-shadow(none);
+    }
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+        cursor: $cursor-disabled;
+        @include opacity(0.4);
+        @include box-shadow(none);
+    }
+}
+
+// Alternate buttons
+// --------------------------------------------------
+
+.btn-primary {
+    @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border, $btn-primary-bg-hover, $btn-primary-bg-focus, $btn-primary-bg-active);
+
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] & {
+        background-color: $gray;
+        border-color: $gray;
+        &:hover,
+        &:focus,
+        &.focus {
+            background-color: $gray;
+            border-color: $gray;
+        }
+    }
+}
+
+.btn-create {
+    //only button with hard-coded padding and font-size
+    font-size: $btn-create-font-size;
+    padding: $btn-create-padding;
+    line-height: $btn-create-line-height;
+    height: $btn-create-height;
+    width: $btn-create-width;
+    position: relative;
+
+    &:before {
+        content: '+';
+        position: absolute;
+        top: -1px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.btn-icon,
+.btn-delete {
+    color: $gray-light;
+    padding: 6px 10px;
+    font-size: 19px;
+    margin-right: 8px;
+    max-height: 33px;
+
+    &:hover {
+        text-decoration: none;
+        color: $gray;
+    }
+}
+
+
+.btn-export {
+    > i {
+        font-size: 16px;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+}
+
+.btn-hollow-white {
+    @include hollow-button-variant($btn-hollow-white-color, $btn-hollow-white-border);
+    box-shadow: 0 0 1px 0 rgba($black, 0.12);
+}
+
+.btn-hollow-primary {
+    @include hollow-button-variant($btn-hollow-primary-color, $btn-hollow-primary-border);
+    box-shadow: 0 0 1px 0 rgba($black, 0.12);
+}
+
+.btn-hollow-gray {
+    @include hollow-button-variant($btn-hollow-gray-color, $btn-hollow-gray-border);
+    box-shadow: 0 0 1px 0 rgba($black, 0.12);
+}
+
+.btn-link {
+    &.btn-sort {
+        color: $gray-lighter;
+        font-size: $font-size-small;
+        font-weight: $font-weight-medium;
+        line-height: 15px;
+        border: none;
+
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
+            border: none;
+            outline: none;
+        }
+
+        &:hover {
+            color: $gray;
+        }
+
+        .sort-icon {
+            line-height: 15px;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+    }
+}
+
+// Button Sizes
+// --------------------------------------------------
+
+.btn-3lg {
+    @include button-size($btn-3lg-padding-vertical, $btn-3lg-padding-horizontal, $btn-3lg-font-size, $btn-3lg-line-height, $btn-3lg-border-radius);
+}
+
+.btn-2lg {
+    @include button-size($btn-2lg-padding-vertical, $btn-2lg-padding-horizontal, $btn-2lg-font-size, $btn-2lg-line-height, $btn-2lg-border-radius);
+}
+
+.btn-lg {
+    // line-height: ensure even-numbered height of button next to large input
+    @include button-size($btn-lg-padding-vertical, $btn-lg-padding-horizontal, $btn-lg-font-size, $btn-lg-line-height, $btn-border-radius-large);
+}
+
+.btn-sm {
+    // line-height: ensure proper height of button next to small input
+    @include button-size($btn-sm-padding-vertical, $btn-sm-padding-horizontal, $btn-sm-font-size, $btn-sm-line-height, $btn-sm-border-radius);
+}
+
+.btn-xs {
+    @include button-size($btn-xs-padding-vertical, $btn-xs-padding-horizontal, $btn-xs-font-size, $btn-xs-line-height, $btn-xs-border-radius);
+}

@@ -1,0 +1,91 @@
+//
+// Gradient CSS Loader
+// ------------------------------
+
+$gradient-loader-height: 35px;
+
+.gradient-loader {
+    background: transparent;
+    padding: 12px 0;
+    //margin: 0 auto;
+    max-width: 90%;
+    min-height: $gradient-loader-height;
+
+    .animated-background {
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: placeHolderShimmer;
+        animation-timing-function: linear;
+        background: linear-gradient(
+            to right,
+            #eeeeee 8%,
+            #dddddd 18%,
+            #eeeeee 33%
+        );
+        background-size: 800px 104px;
+        height: $gradient-loader-height;
+        position: relative;
+    }
+
+    .background-masker {
+        background: $gray-lightest;
+        position: absolute;
+    }
+
+    //Every thing below this is just positioning
+
+    .background-masker.top,
+    .background-masker.second-line,
+    .background-masker.third-line,
+    .background-masker.second-end,
+    .background-masker.third-end,
+    .background-masker.first-end {
+        top: 40px;
+        left: 0;
+        right: 0;
+        height: 6px;
+    }
+
+    .background-masker.top {
+        height: 60px;
+        top: 0;
+    }
+
+    .background-masker.first-end,
+    .background-masker.second-end,
+    .background-masker.third-end {
+        width: auto;
+        left: 16%;
+        top: 0;
+        height: 8px;
+        right: 0;
+    }
+
+    .background-masker.second-line {
+        top: 8px;
+    }
+
+    .background-masker.second-end {
+        left: 45%;
+        top: 14px;
+    }
+
+    .background-masker.third-line {
+        top: 22px;
+    }
+
+    .background-masker.third-end {
+        left: 75%;
+        top: 27px;
+    }
+}
+
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: -468px 0;
+    }
+    100% {
+        background-position: 468px 0;
+    }
+}

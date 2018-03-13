@@ -1,0 +1,62 @@
+//
+// Tags
+// ------------------------
+
+// Base Styles
+.tag {
+    display: inline-block;
+    vertical-align: middle;
+    transition: all 0.2s ease;
+
+    @include tag-variant($tag-color, $tag-bg);
+    @include tag-size($tag-padding, $tag-font-size, $tag-font-weight, $tag-line-height, $tag-border-radius);
+}
+
+// Tag Variants
+// ------------------------
+.tag-light {
+    @include tag-variant($tag-light-color, $tag-light-bg);
+}
+
+.tag-primary {
+    @include tag-variant($tag-primary-color, $tag-primary-bg);
+
+    &.tag-dismissible {
+        @include tag-variant($tag-primary-color, $tag-primary-bg, true, $tag-primary-hover-color, $tag-primary-hover-bg)
+    }
+}
+
+.tag-secondary {
+    @include tag-variant($tag-secondary-color, $tag-secondary-bg);
+}
+
+.tag-success {
+    @include tag-variant($tag-success-color, $tag-success-bg);
+}
+
+.tag-warning {
+    @include tag-variant($tag-warning-color, $tag-warning-bg);
+}
+
+.tag-info {
+    @include tag-variant($tag-info-color, $tag-info-bg);
+}
+
+.tag-danger {
+    @include tag-variant($tag-danger-color, $tag-danger-bg);
+}
+
+// Tag Sizes
+// ------------------------
+
+.tag-lg {
+    @include tag-size($tag-lg-padding, $tag-lg-font-size, $tag-lg-font-weight, $tag-lg-line-height, $tag-lg-border-radius);
+}
+
+.tag-sm {
+    @include tag-size($tag-sm-padding, $tag-sm-font-size, $tag-sm-font-weight, $tag-sm-line-height, $tag-sm-border-radius);
+}
+
+.tag-xs {
+    @include tag-size($tag-xs-padding, $tag-xs-font-size, $tag-xs-font-weight, $tag-xs-line-height, $tag-xs-border-radius);
+}

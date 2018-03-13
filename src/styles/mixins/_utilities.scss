@@ -1,0 +1,11 @@
+@mixin text-overflow-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@mixin headingSettings() {
+    font-size: $font-size-base;
+    color: $brand-secondary;
+    font-weight: $font-weight-black;
+}

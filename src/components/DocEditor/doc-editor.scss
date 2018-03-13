@@ -1,0 +1,17 @@
+.document-editor {
+    padding: 20px;
+    background: $white;
+    box-shadow: 0 2px 2px 2px rgba($black, 0.2);
+
+    .toolbar-menu {
+        margin-bottom: 10px;
+
+        .button {
+            margin-right: 10px;
+            cursor: pointer;
+            &:first-child {
+                margin-left: -5px;
+            }
+        }
+    }
+}
