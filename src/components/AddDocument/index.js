@@ -4,6 +4,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 import { addDocument } from '../../actions/document-actions';
+import { addDocumentToFolder } from '../../actions/folder-actions';
 
 import DocEditor from '../DocEditor';
 
@@ -16,9 +17,15 @@ class AddDocument extends Component {
         if (!title) {
             alert('Please add title');
         }
-        const { history, addDocument, location: { pathname } } = this.props;
+        const {
+            history,
+            addDocument,
+            location: { pathname, state: { folderId } }
+        } = this.props;
+
         if (pathname === '/docs/add') {
-            addDocument({ title, content: update }, id => {
+            addDocument({ title, content: update, folderId }, folderId, id => {
+                addDocumentToFolder(folderId, { title, id });
                 history.push(`/docs/${id}`);
             });
         }
@@ -41,7 +48,8 @@ AddDocument.propTypes = {
 };
 
 const mapDispatchToProps = {
-    addDocument
+    addDocument,
+    addDocumentToFolder
 };
 
 export default withRouter(connect(null, mapDispatchToProps)(AddDocument));

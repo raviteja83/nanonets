@@ -1,16 +1,21 @@
 .empty-docs {
     margin: 20% auto;
-    width: 450px;
+    width: 50%;
+
+    i {
+        font-size: 100px;
+        color: $gray-lighter;
+    }
 
     &-content {
         text-align: center;
-        padding: 40px 80px;
+        padding: 30px 80px 40px;
         background: rgba($black, 0.05);
     }
 
     &-description {
         font-size: $font-size-h3;
         color: $brand-secondary;
-        margin: 20px 0;
+        margin-bottom: 20px;
     }
 }

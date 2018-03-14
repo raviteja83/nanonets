@@ -5,15 +5,17 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router';
 
 import DataContainer from './containers/DataContainer';
+import FolderContainer from './containers/FolderContainer';
+import FolderDocContainer from './containers/FolderDocContainer';
 import DocumentDetail from './containers/DocumentDetail';
 import AddDocument from './components/AddDocument';
+import AddFolder from './components/AddFolder';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 
 import { saveUserInfo } from './actions/login-actions';
 
 import './app.scss';
-import FolderContainer from './containers/FolderContainer';
 
 class App extends Component {
     static propTypes = {
@@ -42,11 +44,24 @@ class App extends Component {
                     <Switch>
                         <Route path="/docs/add" exact component={AddDocument} />
                         <Route
+                            path="/folders/add"
+                            exact
+                            component={AddFolder}
+                        />
+                        <Route
                             path="/docs/:action"
                             component={DocumentDetail}
                         />
-                        <Route path="/" component={FolderContainer} />
-                        <Route path="/folders" component={FolderContainer} />
+                        <Route path="/" exact component={FolderContainer} />
+                        <Route
+                            path="/folders"
+                            exact
+                            component={FolderContainer}
+                        />
+                        <Route
+                            path="/folders/:action"
+                            component={FolderDocContainer}
+                        />
                         <Route path="/docs" component={DataContainer} />
                     </Switch>
                 </div>

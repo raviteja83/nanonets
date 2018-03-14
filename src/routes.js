@@ -8,10 +8,10 @@ import Logout from './Logout';
 const Routes = () => {
     return (
         <Switch>
+            <Route path="/login" exact component={Login} />
+            <Route path="/logout" exact component={Logout} />
+            <Route path="/register" exact component={Login} />
             <Route path="*" component={App} />
-            <Route path="/login" component={Login} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/register" component={Login} />
         </Switch>
     );
 };

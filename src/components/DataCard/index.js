@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
 
 import './data-card.scss';
-import { selectDataFromId } from '../../selectors/documents-selectors';
 
 class DataCard extends Component {
     handleClick = () => {
-        const { history, id } = this.props;
-        history.push(`/docs/${id}`);
+        const { history, id, type } = this.props;
+        history.push(`/${type}/${id}`);
     };
 
     render() {
@@ -25,11 +22,13 @@ class DataCard extends Component {
 
 DataCard.propTypes = {
     id: PropTypes.string.isRequired,
-    history: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired,
+    type: PropTypes.string
 };
 
-const mapStateToProps = createStructuredSelector({
-    data: selectDataFromId()
-});
+DataCard.defaultProps = {
+    type: 'docs'
+};
 
-export default withRouter(connect(mapStateToProps)(DataCard));
+export default withRouter(DataCard);

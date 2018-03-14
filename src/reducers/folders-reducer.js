@@ -7,11 +7,11 @@ import {
     GET_FOLDER_SUCCESS,
     GET_FOLDER_LOADING,
     GET_FOLDER_ERROR,
-    FIRST_VISIT,
     GET_FOLDER_ID_LOADING,
     GET_FOLDER_ID_ERROR,
     GET_FOLDER_ID_SUCCESS,
-    UPDATE_FOLDER_ID_SUCCESS
+    UPDATE_FOLDER_ID_SUCCESS,
+    FOLDER_FIRST_VISIT
 } from '../constants/action-types';
 
 const initialState = state.documents;
@@ -82,7 +82,7 @@ export function data(state = initialState.data, action) {
 
 export function firstVisit(state = initialState.firstVisit, action) {
     switch (action.type) {
-        case FIRST_VISIT:
+        case FOLDER_FIRST_VISIT:
             return action.payload;
         default:
             return state;

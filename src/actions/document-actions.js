@@ -37,7 +37,7 @@ export const getLoading = createAction(GET_DOCUMENT_LOADING);
 export const getSuccess = createAction(GET_DOCUMENT_SUCCESS);
 export const getError = createAction(GET_DOCUMENT_ERROR);
 
-export function addDocument(body, callback) {
+export function addDocument(body, folderId, callback) {
     return (dispatch, getState) => {
         dispatch(addLoading(true));
         const documentsRef = firebase.database().ref('/documents');

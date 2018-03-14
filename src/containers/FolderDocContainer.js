@@ -6,26 +6,33 @@ import { connect } from 'react-redux';
 import DataCard from '../components/DataCard';
 import { GradientLoader } from '../components/GradientLoader';
 
-import { getAllFolders } from '../actions/folder-actions';
+import { getFolderDataById } from '../actions/folder-actions';
+
 import {
-    selectData,
+    selectCurrentId,
     selectGetLoading,
-    selectFirstVisit
+    selectFirstVisit,
+    selectDocsForFolder
 } from '../selectors/folders-selectors';
 
-class FolderContainer extends Component {
+class FolderDocContainer extends Component {
     componentDidMount() {
-        this.props.getAllFolders().then(() => {
-            const { location: { pathname }, data, history } = this.props;
-            const key = Object.keys(data)[0];
-            if (key && pathname === '/') {
-                history.push(`/folders/${key}`);
-            }
-        });
+        this.getData(this.props.id);
     }
 
-    redirectToAdd = () => {
-        this.props.history.push('/folders/add');
+    componentWillReceiveProps(nextProps) {
+        if (this.props.id !== nextProps.id) {
+            this.getData(nextProps.id);
+        }
+    }
+
+    getData = id => {
+        const { getFolderDataById } = this.props;
+        getFolderDataById(id);
+    };
+
+    handleAddDoc = () => {
+        this.props.history.push('/docs/add', { folderId: this.props.id });
     };
 
     render() {
@@ -43,19 +50,18 @@ class FolderContainer extends Component {
                         <div
                             key="blank"
                             className="blank-card"
-                            onClick={this.redirectToAdd}
+                            onClick={this.handleAddDoc}
                         >
-                            <i className="material-icons">create_new_folder</i>
-                            <div className="blank-card-title">Add Folder</div>
+                            <i className="material-icons">insert_drive_file</i>
+                            <div className="blank-card-title">Add Doc</div>
                         </div>,
                         keys.map(key => {
                             const value = data[key];
                             return (
                                 <DataCard
-                                    type="folders"
                                     key={key}
                                     data={value}
-                                    id={key}
+                                    id={value.id}
                                 />
                             );
                         })
@@ -66,21 +72,22 @@ class FolderContainer extends Component {
     }
 }
 
-FolderContainer.propTypes = {
+FolderDocContainer.propTypes = {
     data: PropTypes.object.isRequired,
-    getAllFolders: PropTypes.func.isRequired,
+    getFolderDataById: PropTypes.func.isRequired,
     loading: PropTypes.bool.isRequired,
     firstVisit: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = createStructuredSelector({
-    data: selectData(),
+    data: selectDocsForFolder(),
     loading: selectGetLoading(),
-    firstVisit: selectFirstVisit()
+    firstVisit: selectFirstVisit(),
+    id: selectCurrentId()
 });
 
 const mapDispatchToProps = {
-    getAllFolders
+    getFolderDataById
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FolderContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(FolderDocContainer);

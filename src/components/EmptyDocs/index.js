@@ -4,13 +4,14 @@ import { Button } from 'react-bootstrap';
 
 import './empty-docs.scss';
 
-const EmptyDocs = ({ onClick, description }) => {
+const EmptyDocs = ({ onClick, description, btnText, iconName }) => {
     return (
         <div className="empty-docs">
             <div className="empty-docs-content">
+                <i className="material-icons">{iconName}</i>
                 <div className="empty-docs-description">{description}</div>
                 <Button className="btn-primary" onClick={onClick}>
-                    Add New Doc
+                    {btnText}
                 </Button>
             </div>
         </div>
@@ -19,7 +20,9 @@ const EmptyDocs = ({ onClick, description }) => {
 
 EmptyDocs.propTypes = {
     onClick: PropTypes.func.isRequired,
-    description: PropTypes.string.isRequired
+    description: PropTypes.string.isRequired,
+    btnText: PropTypes.string.isRequired,
+    iconName: PropTypes.string.isRequired
 };
 
 export default EmptyDocs;

@@ -10,18 +10,13 @@ import { GradientLoader } from '../GradientLoader';
 
 import {
     selectGetLoading,
-    selectData,
-    selectFirstVisit
-} from '../../selectors/documents-selectors';
+    selectFirstVisit,
+    selectFormatDataToTree
+} from '../../selectors/folders-selectors';
 
 class Sidebar extends Component {
     render() {
-        const {
-            loading,
-            data,
-            match: { params: { action } },
-            firstVisit
-        } = this.props;
+        const { loading, data, firstVisit } = this.props;
 
         return (
             <div className="sidebar">
@@ -31,21 +26,8 @@ class Sidebar extends Component {
                     </div>
                 ) : (
                     <Fragment>
-                        <NavLink to="/docs">Home</NavLink>
-                        {Object.keys(data).map(key => {
-                            const { title } = data[key];
-                            return (
-                                <NavLink
-                                    key={key}
-                                    className={action === key ? 'active' : ''}
-                                    to={`/docs/${key}`}
-                                    title={title}
-                                >
-                                    {title}
-                                </NavLink>
-                            );
-                        })}
-                        <FolderTree />
+                        <NavLink to="/folders">Home</NavLink>
+                        <FolderTree data={data} />
                     </Fragment>
                 )}
             </div>
@@ -54,13 +36,13 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
     firstVisit: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = createStructuredSelector({
-    data: selectData(),
+    data: selectFormatDataToTree(),
     loading: selectGetLoading(),
     firstVisit: selectFirstVisit()
 });

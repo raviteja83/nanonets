@@ -43,6 +43,8 @@ class DataContainer extends Component {
                 ) : keys.length === 0 ? (
                     <EmptyDocs
                         description="No Docs Found. Please create one"
+                        btnText="Add Doc"
+                        iconName="insert_drive_file"
                         onClick={this.redirectToAdd}
                     />
                 ) : (

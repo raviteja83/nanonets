@@ -37,14 +37,14 @@ export const getLoading = createAction(GET_FOLDER_LOADING);
 export const getSuccess = createAction(GET_FOLDER_SUCCESS);
 export const getError = createAction(GET_FOLDER_ERROR);
 
-export function addDocument(body, callback) {
+export function addFolder(title, callback) {
     return (dispatch, getState) => {
         dispatch(addLoading(true));
-        const documentsRef = firebase.database().ref('/documents');
-        const newRef = documentsRef.push();
+        const foldersRef = firebase.database().ref('/folders');
+        const newRef = foldersRef.push();
         const key = newRef.key;
         return newRef
-            .set(body)
+            .set({ title })
             .then(() => {
                 dispatch(addLoading(false));
                 callback && callback(key);
@@ -60,9 +60,15 @@ export const addLoading = createAction(ADD_FOLDER_LOADING);
 export const addSuccess = createAction(ADD_FOLDER_SUCCESS);
 export const addError = createAction(ADD_FOLDER_ERROR);
 
-export function getDataById(id) {
+export function addDocumentToFolder(id, docInfo) {
+    const ref = firebase.database().ref(`/folders/${id}/documents`);
+    const newRef = ref.push();
+    newRef.update(docInfo);
+}
+
+export function getFolderDataById(id) {
     return dispatch => {
-        const ref = firebase.database().ref(`/documents/${id}`);
+        const ref = firebase.database().ref(`/folders/${id}`);
         dispatch(getIdLoading(true));
         return ref.once('value', snapshot => {
             dispatch(getIdLoading(false));
@@ -76,9 +82,9 @@ export const getIdLoading = createAction(GET_FOLDER_ID_LOADING);
 export const getIdSuccess = createAction(GET_FOLDER_ID_SUCCESS);
 export const getIdError = createAction(GET_FOLDER_ID_ERROR);
 
-export function addListener(id) {
+export function addListener() {
     return dispatch => {
-        const ref = firebase.database().ref(`/documents/${id}`);
+        const ref = firebase.database().ref(`/folders`);
         ref.on('value', snapshot => {
             const key = snapshot.key;
             const data = snapshot.val();
@@ -89,16 +95,16 @@ export function addListener(id) {
 
 export const updateSuccess = createAction(UPDATE_FOLDER_ID_SUCCESS);
 
-export function removeListener(id) {
+export function removeListener() {
     return dispatch => {
-        const ref = firebase.database().ref(`/documents/${id}`);
+        const ref = firebase.database().ref(`/folders`);
         ref.off('value');
     };
 }
 
 export function updateDataForId(id, update) {
     return dispatch => {
-        const ref = firebase.database().ref(`/documents/${id}`);
+        const ref = firebase.database().ref(`/folders/${id}`);
         ref.update(update);
     };
 }
