@@ -9,7 +9,9 @@ import {
     GET_DOCUMENT_ERROR,
     FIRST_VISIT,
     GET_ID_LOADING,
-    GET_ID_ERROR
+    GET_ID_ERROR,
+    GET_ID_SUCCESS,
+    UPDATE_ID_SUCCESS
 } from '../constants/action-types';
 
 const initialState = state.documents;
@@ -61,6 +63,8 @@ export function error(state = initialState.error, action) {
 export function data(state = initialState.data, action) {
     switch (action.type) {
         case ADD_DOCUMENT_SUCCESS:
+        case GET_ID_SUCCESS:
+        case UPDATE_ID_SUCCESS:
             return {
                 ...state,
                 ...action.payload

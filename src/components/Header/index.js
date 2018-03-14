@@ -1,34 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Navbar, Nav, MenuItem, NavDropdown } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { Switch, Route } from 'react-router';
 
-import { selectEmail } from '../../selectors/login-selectors';
+import HeaderAction from './HeaderAction';
+import HeaderNav from './HeaderNav';
 
-const Header = ({ email }) => {
+import './header.scss';
+
+const Header = () => {
     return (
-        <div className="header">
-            <Navbar className="mt-navbar" fluid>
-                <Nav pullRight>
-                    <NavDropdown title={email} id="header-user-dropdown">
-                        <LinkContainer to="/logout">
-                            <MenuItem>Logout</MenuItem>
-                        </LinkContainer>
-                    </NavDropdown>
-                </Nav>
-            </Navbar>
-        </div>
+        <Switch>
+            <Route path="/docs/:action" component={HeaderAction} />
+            <Route path="/docs" exact component={HeaderNav} />
+            <Route path="/docs/add" exact component={HeaderNav} />
+            <Route path="/logout" exact component={HeaderNav} />
+        </Switch>
     );
 };
 
-Header.propTypes = {
-    email: PropTypes.string
-};
-
-const mapStateToProps = createStructuredSelector({
-    email: selectEmail()
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;

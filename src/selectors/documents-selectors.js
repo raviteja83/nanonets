@@ -35,8 +35,10 @@ export const selectData = () =>
 export const selectDataFromId = () =>
     createSelector(
         selectData(),
-        (_, props) => props.match.params.action,
-        (data, id) => data[id] || {}
+        (_, props) => props.id || props.match.params.action,
+        (data, id) => {
+            return data[id] || {};
+        }
     );
 
 export const selectCurrentId = () => (_, props) => {

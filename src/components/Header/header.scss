@@ -1,0 +1,42 @@
+.header {
+    &.header-action,
+    &.header-nav {
+        flex: 100%;
+        display: flex;
+        align-items: center;
+
+        .logout {
+            flex-grow: 1;
+            text-align: right;
+        }
+
+        a {
+            display: block;
+            font-size: $font-size-large;
+            line-height: 36px;
+            color: $brand-secondary;
+            margin-right: 10px;
+            padding: 0 10px;
+
+            &.active {
+                background-color: rgba($brand-primary, 0.8);
+                color: $white;
+
+                &:hover {
+                    background-color: $brand-primary;
+                }
+            }
+            &:hover {
+                cursor: pointer;
+                background-color: rgba($black, 0.05);
+            }
+        }
+    }
+    &.header-action {
+        padding: 0 15px;
+    }
+
+    &-title {
+        @include text-overflow-ellipsis;
+    }
+}

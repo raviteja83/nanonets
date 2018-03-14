@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Editor, getEventRange, getEventTransfer } from 'slate-react';
-import { Value } from 'slate';
+import { Block, Value } from 'slate';
+import { LAST_CHILD_TYPE_INVALID } from 'slate-schema-violations';
 import isUrl from 'is-url';
 import imageExtensions from 'image-extensions';
 import { debounce } from 'lodash';
@@ -15,6 +16,26 @@ const isBoldHotkey = isKeyHotkey('mod+b');
 const isItalicHotkey = isKeyHotkey('mod+i');
 const isUnderlinedHotkey = isKeyHotkey('mod+u');
 const isCodeHotkey = isKeyHotkey('mod+`');
+
+const schema = {
+    document: {
+        last: { types: ['paragraph'] },
+        normalize: (change, reason, { node, child }) => {
+            switch (reason) {
+                case LAST_CHILD_TYPE_INVALID: {
+                    const paragraph = Block.create('paragraph');
+                    return change.insertNodeByKey(
+                        node.key,
+                        node.nodes.size,
+                        paragraph
+                    );
+                }
+                default:
+                    break;
+            }
+        }
+    }
+};
 
 class DocEditor extends React.Component {
     static propTypes = {
@@ -97,7 +118,7 @@ class DocEditor extends React.Component {
         const updatedValue = value.toJSON();
         const updatedTitle = Plain.serialize(title);
         const { nodes } = updatedValue.document;
-        if (nodes.length > 0) {
+        if (nodes.length > 1) {
             this.props.onChange(updatedValue, updatedTitle);
         }
     };
@@ -248,6 +269,7 @@ class DocEditor extends React.Component {
         return (
             <Editor
                 placeholder="Enter some rich text..."
+                schema={schema}
                 value={this.state.value}
                 onChange={this.onChange}
                 onKeyDown={this.onKeyDown}
@@ -321,12 +343,35 @@ class DocEditor extends React.Component {
         );
     };
 
+    onTitleKeyDown = (event, change) => {
+        let mark;
+
+        if (isBoldHotkey(event)) {
+            mark = 'bold';
+        } else if (isItalicHotkey(event)) {
+            mark = 'italic';
+        } else if (isUnderlinedHotkey(event)) {
+            mark = 'underlined';
+        } else if (isCodeHotkey(event)) {
+            mark = 'code';
+        } else if (event.which === 13) {
+            event.preventDefault();
+            return;
+        } else {
+            return;
+        }
+        event.preventDefault();
+        change.toggleMark(mark);
+        return true;
+    };
+
     renderTitleEditor = () => {
         return (
             <Editor
                 placeholder="Enter some rich text..."
                 value={this.state.title}
                 onChange={this.onTitleChange}
+                onKeyDown={this.onTitleKeyDown}
             />
         );
     };

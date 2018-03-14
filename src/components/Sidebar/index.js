@@ -32,6 +32,7 @@ class Sidebar extends Component {
                         <NavLink to="/docs/add">
                             <i className="fa fa-plus mr-5" />Add New Doc
                         </NavLink>
+                        <NavLink to="/docs">Home</NavLink>
                         {Object.keys(data).map(key => {
                             const { title } = data[key];
                             return (

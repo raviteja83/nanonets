@@ -8,6 +8,7 @@ import DataContainer from './containers/DataContainer';
 import DocumentDetail from './containers/DocumentDetail';
 import AddDocument from './components/AddDocument';
 import Sidebar from './components/Sidebar';
+import Header from './components/Header';
 
 import { saveUserInfo } from './actions/login-actions';
 
@@ -34,6 +35,7 @@ class App extends Component {
     render() {
         return (
             <div className="main-page">
+                <Header />
                 <Sidebar />
                 <div className="main-content">
                     <Switch>

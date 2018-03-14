@@ -1,11 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
 import GradientLoader from '../components/GradientLoader';
 
-import { updateDataForId, getDataById } from '../actions/document-actions';
+import {
+    updateDataForId,
+    getDataById,
+    addListener,
+    removeListener
+} from '../actions/document-actions';
 
 import {
     selectDataFromId,
@@ -17,19 +23,32 @@ import './document-detail.scss';
 import DocEditor from '../components/DocEditor';
 
 class DocumentDetail extends React.Component {
+    static propTypes = {
+        updateDataForId: PropTypes.func.isRequired,
+        getDataById: PropTypes.func.isRequired,
+        addListener: PropTypes.func.isRequired,
+        removeListener: PropTypes.func.isRequired,
+        id: PropTypes.string.isRequired
+    };
+
     componentDidMount() {
         this.getData(this.props.id);
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.id !== nextProps.id) {
+            this.props.removeListener(this.props.id);
             this.getData(nextProps.id);
         }
     }
 
-    getData = id => {
-        const { getDataById } = this.props;
+    componentWillUnmount() {
+        this.props.removeListener(this.props.id);
+    }
 
+    getData = id => {
+        const { getDataById, addListener } = this.props;
+        addListener(id);
         getDataById(id);
     };
 
@@ -67,7 +86,9 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
     updateDataForId,
-    getDataById
+    getDataById,
+    addListener,
+    removeListener
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DocumentDetail);

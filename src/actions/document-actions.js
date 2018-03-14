@@ -10,7 +10,8 @@ import {
     FIRST_VISIT,
     GET_ID_LOADING,
     GET_ID_SUCCESS,
-    GET_ID_ERROR
+    GET_ID_ERROR,
+    UPDATE_ID_SUCCESS
 } from '../constants/action-types';
 
 export function getAllDocuments() {
@@ -63,10 +64,10 @@ export function getDataById(id) {
     return dispatch => {
         const ref = firebase.database().ref(`/documents/${id}`);
         dispatch(getIdLoading(true));
-        return ref.on('value', snapshot => {
+        return ref.once('value', snapshot => {
             dispatch(getIdLoading(false));
             const data = snapshot.val();
-            dispatch(addSuccess({ [id]: data }));
+            dispatch(getIdSuccess({ [id]: data }));
         });
     };
 }
@@ -74,6 +75,19 @@ export function getDataById(id) {
 export const getIdLoading = createAction(GET_ID_LOADING);
 export const getIdSuccess = createAction(GET_ID_SUCCESS);
 export const getIdError = createAction(GET_ID_ERROR);
+
+export function addListener(id) {
+    return dispatch => {
+        const ref = firebase.database().ref(`/documents/${id}`);
+        ref.on('value', snapshot => {
+            const key = snapshot.key;
+            const data = snapshot.val();
+            dispatch(updateSuccess({ [key]: data }));
+        });
+    };
+}
+
+export const updateSuccess = createAction(UPDATE_ID_SUCCESS);
 
 export function removeListener(id) {
     return dispatch => {
