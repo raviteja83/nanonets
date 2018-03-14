@@ -13,6 +13,7 @@ import Header from './components/Header';
 import { saveUserInfo } from './actions/login-actions';
 
 import './app.scss';
+import FolderContainer from './containers/FolderContainer';
 
 class App extends Component {
     static propTypes = {
@@ -44,7 +45,8 @@ class App extends Component {
                             path="/docs/:action"
                             component={DocumentDetail}
                         />
-                        <Route path="/" component={DataContainer} />
+                        <Route path="/" component={FolderContainer} />
+                        <Route path="/folders" component={FolderContainer} />
                         <Route path="/docs" component={DataContainer} />
                     </Switch>
                 </div>

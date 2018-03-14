@@ -21,5 +21,19 @@ export default {
         },
         data: {},
         firstVisit: true
+    },
+    folders: {
+        loading: {
+            add: false,
+            get: false,
+            getOne: false
+        },
+        error: {
+            add: '',
+            get: '',
+            getOne: ''
+        },
+        data: {},
+        firstVisit: true
     }
 };

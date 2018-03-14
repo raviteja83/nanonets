@@ -1,22 +1,22 @@
 import firebase from 'firebase';
 import { createAction } from 'redux-actions';
 import {
-    ADD_DOCUMENT_LOADING,
-    ADD_DOCUMENT_SUCCESS,
-    ADD_DOCUMENT_ERROR,
-    GET_DOCUMENT_LOADING,
-    GET_DOCUMENT_SUCCESS,
-    GET_DOCUMENT_ERROR,
+    ADD_FOLDER_LOADING,
+    ADD_FOLDER_SUCCESS,
+    ADD_FOLDER_ERROR,
+    GET_FOLDER_LOADING,
+    GET_FOLDER_SUCCESS,
+    GET_FOLDER_ERROR,
     FIRST_VISIT,
-    GET_ID_LOADING,
-    GET_ID_SUCCESS,
-    GET_ID_ERROR,
-    UPDATE_ID_SUCCESS
+    GET_FOLDER_ID_LOADING,
+    GET_FOLDER_ID_SUCCESS,
+    GET_FOLDER_ID_ERROR,
+    UPDATE_FOLDER_ID_SUCCESS
 } from '../constants/action-types';
 
-export function getAllDocuments() {
+export function getAllFolders() {
     return dispatch => {
-        const documentsRef = firebase.database().ref('/documents');
+        const documentsRef = firebase.database().ref('/folders');
         dispatch(getLoading(true));
         return documentsRef
             .once('value', snapshot => {
@@ -33,9 +33,9 @@ export function getAllDocuments() {
 }
 
 export const updateVisit = createAction(FIRST_VISIT);
-export const getLoading = createAction(GET_DOCUMENT_LOADING);
-export const getSuccess = createAction(GET_DOCUMENT_SUCCESS);
-export const getError = createAction(GET_DOCUMENT_ERROR);
+export const getLoading = createAction(GET_FOLDER_LOADING);
+export const getSuccess = createAction(GET_FOLDER_SUCCESS);
+export const getError = createAction(GET_FOLDER_ERROR);
 
 export function addDocument(body, callback) {
     return (dispatch, getState) => {
@@ -56,9 +56,9 @@ export function addDocument(body, callback) {
     };
 }
 
-export const addLoading = createAction(ADD_DOCUMENT_LOADING);
-export const addSuccess = createAction(ADD_DOCUMENT_SUCCESS);
-export const addError = createAction(ADD_DOCUMENT_ERROR);
+export const addLoading = createAction(ADD_FOLDER_LOADING);
+export const addSuccess = createAction(ADD_FOLDER_SUCCESS);
+export const addError = createAction(ADD_FOLDER_ERROR);
 
 export function getDataById(id) {
     return dispatch => {
@@ -72,9 +72,9 @@ export function getDataById(id) {
     };
 }
 
-export const getIdLoading = createAction(GET_ID_LOADING);
-export const getIdSuccess = createAction(GET_ID_SUCCESS);
-export const getIdError = createAction(GET_ID_ERROR);
+export const getIdLoading = createAction(GET_FOLDER_ID_LOADING);
+export const getIdSuccess = createAction(GET_FOLDER_ID_SUCCESS);
+export const getIdError = createAction(GET_FOLDER_ID_ERROR);
 
 export function addListener(id) {
     return dispatch => {
@@ -87,7 +87,7 @@ export function addListener(id) {
     };
 }
 
-export const updateSuccess = createAction(UPDATE_ID_SUCCESS);
+export const updateSuccess = createAction(UPDATE_FOLDER_ID_SUCCESS);
 
 export function removeListener(id) {
     return dispatch => {

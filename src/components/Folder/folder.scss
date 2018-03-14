@@ -1,0 +1,15 @@
+.folder {
+    margin: 5px;
+    background: $white;
+
+    &-title {
+        font-size: $font-size-h3;
+        text-align: center;
+        @include text-overflow-ellipsis;
+    }
+
+    &-icon {
+        width: 56px;
+        height: 56px;
+    }
+}
