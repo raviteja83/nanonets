@@ -69,6 +69,24 @@ class DocEditor extends React.Component {
         });
     };
 
+    wrapLink = (change, href) => {
+        change.wrapInline({
+            type: 'link',
+            data: { href }
+        });
+
+        change.collapseToEnd();
+    };
+
+    unwrapLink = change => {
+        change.unwrapInline('link');
+    };
+
+    hasLinks = () => {
+        const { value } = this.state;
+        return value.inlines.some(inline => inline.type === 'link');
+    };
+
     hasMark = type => {
         const { value } = this.state;
         return value.activeMarks.some(mark => mark.type === type);
@@ -155,6 +173,29 @@ class DocEditor extends React.Component {
         const change = value.change();
         const { document } = value;
 
+        if (type === 'link') {
+            event.preventDefault();
+            const { value } = this.state;
+            const hasLinks = this.hasLinks();
+            const change = value.change();
+
+            if (hasLinks) {
+                change.call(this.unwrapLink);
+            } else if (value.isExpanded) {
+                const href = window.prompt('Enter the URL of the link:');
+                change.call(this.wrapLink, href);
+            } else {
+                const href = window.prompt('Enter the URL of the link:');
+                const text = window.prompt('Enter the text for the link:');
+                change
+                    .insertText(text)
+                    .extend(0 - text.length)
+                    .call(this.wrapLink, href);
+            }
+            this.onChange(change);
+            return;
+        }
+
         if (type === 'image') {
             const src = window.prompt('Enter the URL of the image:');
             if (!src) return;
@@ -229,6 +270,7 @@ class DocEditor extends React.Component {
                     'format_list_bulleted'
                 )}
                 {this.renderBlockButton('image', 'image')}
+                {this.renderBlockButton('link', 'link')}
             </div>
         );
     };
@@ -311,6 +353,15 @@ class DocEditor extends React.Component {
                         style={style}
                         {...attributes}
                     />
+                );
+            }
+            case 'link': {
+                const { data } = node;
+                const href = data.get('href');
+                return (
+                    <a {...attributes} href={href}>
+                        {children}
+                    </a>
                 );
             }
             default:
