@@ -3,6 +3,20 @@
         "nodes": [
             {
                 "object": "block",
+                "type": "heading-two",
+                "nodes": [
+                    {
+                        "object": "text",
+                        "leaves": [
+                            {
+                                "text": "This is your title"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "object": "block",
                 "type": "paragraph",
                 "nodes": [
                     {

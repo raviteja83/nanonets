@@ -6,7 +6,8 @@ import {
     LOGIN_ERROR,
     REGISTER_ERROR,
     LOGIN_SUCCESS,
-    REGISTER_SUCCESS
+    REGISTER_SUCCESS,
+    SAVE_USER_INFO
 } from '../constants/action-types';
 
 const initialState = state.login;
@@ -49,6 +50,7 @@ export function uid(state = initialState.uid, action) {
     switch (action.type) {
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
+        case SAVE_USER_INFO:
             return action.payload.uid;
         default:
             return state;
@@ -59,6 +61,7 @@ export function email(state = initialState.email, action) {
     switch (action.type) {
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
+        case SAVE_USER_INFO:
             return action.payload.email;
         default:
             return state;

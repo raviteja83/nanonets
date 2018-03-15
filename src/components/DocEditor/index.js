@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Editor, getEventRange, getEventTransfer } from 'slate-react';
-import { Block, Value } from 'slate';
+import { Block, Value, Document } from 'slate';
 import { LAST_CHILD_TYPE_INVALID } from 'slate-schema-violations';
 import isUrl from 'is-url';
 import imageExtensions from 'image-extensions';
 import { debounce } from 'lodash';
 import { isKeyHotkey } from 'is-hotkey';
-import Plain from 'slate-plain-serializer';
 
 import './doc-editor.scss';
 
@@ -45,10 +44,9 @@ class DocEditor extends React.Component {
 
     constructor(props) {
         super(props);
-        const { data, title } = props;
+        const { data } = props;
         this.state = {
-            value: Value.fromJSON(data),
-            title: Plain.deserialize(title)
+            value: Value.fromJSON(data)
         };
         this.debouncedUpdate = debounce(this.handleUpdate, 300);
     }
@@ -132,11 +130,11 @@ class DocEditor extends React.Component {
     };
 
     handleUpdate = () => {
-        const { value, title } = this.state;
+        const { value } = this.state;
         const updatedValue = value.toJSON();
-        const updatedTitle = Plain.serialize(title);
         const { nodes } = updatedValue.document;
         if (nodes.length > 1) {
+            const updatedTitle = Document.fromJSON(nodes[0]).text || 'Title';
             this.props.onChange(updatedValue, updatedTitle);
         }
     };
@@ -385,52 +383,9 @@ class DocEditor extends React.Component {
         }
     };
 
-    onTitleChange = ({ value }) => {
-        this.setState(
-            {
-                title: value
-            },
-            this.debouncedUpdate
-        );
-    };
-
-    onTitleKeyDown = (event, change) => {
-        let mark;
-
-        if (isBoldHotkey(event)) {
-            mark = 'bold';
-        } else if (isItalicHotkey(event)) {
-            mark = 'italic';
-        } else if (isUnderlinedHotkey(event)) {
-            mark = 'underlined';
-        } else if (isCodeHotkey(event)) {
-            mark = 'code';
-        } else if (event.which === 13) {
-            event.preventDefault();
-            return;
-        } else {
-            return;
-        }
-        event.preventDefault();
-        change.toggleMark(mark);
-        return true;
-    };
-
-    renderTitleEditor = () => {
-        return (
-            <Editor
-                placeholder="Enter some rich text..."
-                value={this.state.title}
-                onChange={this.onTitleChange}
-                onKeyDown={this.onTitleKeyDown}
-            />
-        );
-    };
-
     render() {
         return (
             <div className="document-editor">
-                <div className="title-editor">{this.renderTitleEditor()}</div>
                 {this.renderToolbar()}
                 {this.renderEditor()}
             </div>

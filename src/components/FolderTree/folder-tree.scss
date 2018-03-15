@@ -24,6 +24,11 @@
                 i {
                     flex: 0 0 24px;
                 }
+
+                > span {
+                    min-width: 0;
+                    @include text-overflow-ellipsis;
+                }
             }
         }
 

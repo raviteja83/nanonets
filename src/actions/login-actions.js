@@ -7,7 +7,8 @@ import {
     REGISTER_LOADING,
     REGISTER_ERROR,
     REGISTER_SUCCESS,
-    LOGOUT_SUCCESS
+    LOGOUT_SUCCESS,
+    SAVE_USER_INFO
 } from '../constants/action-types';
 
 export function login({ username = '', password = '' }) {
@@ -53,19 +54,7 @@ export const registerLoading = createAction(REGISTER_LOADING);
 export const registerSuccess = createAction(REGISTER_SUCCESS);
 export const registerError = createAction(REGISTER_ERROR);
 
-export function saveUserInfo({ uid, email }) {
-    return dispatch => {
-        firebase
-            .database()
-            .ref()
-            .child('users')
-            .update({
-                [uid]: {
-                    email
-                }
-            });
-    };
-}
+export const saveUserInfo = createAction(SAVE_USER_INFO);
 
 export function logout() {
     return dispatch => {

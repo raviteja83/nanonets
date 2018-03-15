@@ -45,13 +45,22 @@ class Sidebar extends Component {
                 ) : (
                     <Fragment>
                         <NavLink
-                            className="sidebar-nav-link sidebar-nav-link--home "
+                            className="sidebar-nav-link sidebar-nav-link--home"
                             to="/folders"
                             exact
                         >
-                            <i class="material-icons mr-5">home</i>Home
+                            <i className="material-icons mr-5">home</i>Home
                         </NavLink>
                         <FolderTree data={data} />
+                        <NavLink
+                            className="sidebar-nav-link sidebar-nav-link--logout"
+                            to="/logout"
+                            exact
+                        >
+                            <i className="material-icons mr-5">
+                                power_settings_new
+                            </i>Logout
+                        </NavLink>
                     </Fragment>
                 )}
             </div>

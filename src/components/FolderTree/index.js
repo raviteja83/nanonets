@@ -86,7 +86,7 @@ class Tree extends Component {
                                                 <i className="material-icons">
                                                     insert_drive_file
                                                 </i>
-                                                {childTitle}
+                                                <span>{childTitle}</span>
                                             </span>
                                         </NavLink>
                                     );
