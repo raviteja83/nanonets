@@ -11,12 +11,27 @@
             padding: 0;
             background: transparent;
         }
+        &-title > a {
+            text-decoration: none;
+        }
+
+        .sidebar-nav-link {
+            &-content {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+
+                i {
+                    flex: 0 0 24px;
+                }
+            }
+        }
 
         &-body {
             padding: 0;
 
             .sidebar-nav-link {
-                padding-left: 30px;
+                padding-left: 60px;
             }
         }
 

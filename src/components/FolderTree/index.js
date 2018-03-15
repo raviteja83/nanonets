@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { PanelGroup, Panel } from 'react-bootstrap';
-import { isEqual } from 'lodash';
 
 import './folder-tree.scss';
 
@@ -11,45 +10,57 @@ class Tree extends Component {
         data: PropTypes.array.isRequired
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            treeData: props.data
-        };
-    }
+    state = {
+        activeKey: ''
+    };
 
-    componentWillReceiveProps({ data }) {
-        if (!isEqual(this.props.data, data)) {
-            this.setState({
-                treeData: data
-            });
-        }
-    }
+    handleSelect = activeKey => {
+        this.setState({
+            activeKey
+        });
+    };
 
     render() {
-        const { treeData } = this.state;
+        const { activeKey } = this.state;
+        const { data } = this.props;
 
         return (
             <PanelGroup
                 accordion
                 id="sidebar-nav"
                 className="folder-tree"
+                activeKey={activeKey}
                 onSelect={this.handleSelect}
             >
-                {treeData.map(parent => {
+                {data.map(parent => {
                     const { children, id, title } = parent;
+                    const hasChildren = children.length > 0;
 
                     return (
                         <Panel eventKey={id} key={id}>
                             <Panel.Heading>
-                                <Panel.Title toggle>
+                                <Panel.Toggle componentClass="div">
                                     <NavLink
                                         className="sidebar-nav-link"
                                         to={`/folders/${id}`}
                                     >
-                                        {title}
+                                        <span className="sidebar-nav-link-content">
+                                            {hasChildren && (
+                                                <i className="material-icons">
+                                                    {activeKey === id
+                                                        ? 'expand_more'
+                                                        : 'chevron_right'}
+                                                </i>
+                                            )}
+                                            <i className="material-icons">
+                                                folder
+                                            </i>
+                                            <span className="ml-5">
+                                                {title}
+                                            </span>
+                                        </span>
                                     </NavLink>
-                                </Panel.Title>
+                                </Panel.Toggle>
                             </Panel.Heading>
                             <Panel.Body collapsible>
                                 {children.map(child => {
@@ -71,7 +82,12 @@ class Tree extends Component {
                                                 }
                                             }}
                                         >
-                                            {childTitle}
+                                            <span className="sidebar-nav-link-content">
+                                                <i className="material-icons">
+                                                    insert_drive_file
+                                                </i>
+                                                {childTitle}
+                                            </span>
                                         </NavLink>
                                     );
                                 })}

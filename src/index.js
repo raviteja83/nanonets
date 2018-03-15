@@ -3,15 +3,12 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import firebase from 'firebase';
-import createHistory from 'history/createBrowserHistory';
 
 import registerServiceWorker from './registerServiceWorker';
 import store from './store';
 import Routes from './routes';
 
 import './index.scss';
-
-const history = createHistory();
 
 firebase.initializeApp({
     apiKey: 'AIzaSyB3_tAFLY0drjQZuCkB4JqW-OPAxI9Hw2w',
@@ -25,7 +22,7 @@ firebase.initializeApp({
 // Create an enhanced history that syncs navigation events with the store
 render(
     <Provider store={store}>
-        <BrowserRouter history={history} basename={process.env.PUBLIC_URL}>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Routes />
         </BrowserRouter>
     </Provider>,
