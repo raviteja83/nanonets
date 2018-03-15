@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import firebase from 'firebase';
 import createHistory from 'history/createBrowserHistory';
 
@@ -25,9 +25,9 @@ firebase.initializeApp({
 // Create an enhanced history that syncs navigation events with the store
 render(
     <Provider store={store}>
-        <Router history={history}>
+        <BrowserRouter history={history} basename={process.env.PUBLIC_URL}>
             <Routes />
-        </Router>
+        </BrowserRouter>
     </Provider>,
     document.getElementById('root')
 );
