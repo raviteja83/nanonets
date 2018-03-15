@@ -65,8 +65,14 @@ export const selectFormatDataToTree = () =>
                 };
                 const docKeys = Object.keys(documents);
                 docKeys.forEach(docKey => {
-                    const { title } = documents[docKey];
-                    node.children.push({ title, id: docKey });
+                    const value = documents[docKey];
+                    if (value) {
+                        node.children.push({
+                            ...value,
+                            parentId: docKey,
+                            folderId: key
+                        });
+                    }
                 });
                 tree.push(node);
             }

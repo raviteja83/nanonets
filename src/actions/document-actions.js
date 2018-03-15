@@ -99,6 +99,6 @@ export function removeListener(id) {
 export function updateDataForId(id, update) {
     return dispatch => {
         const ref = firebase.database().ref(`/documents/${id}`);
-        ref.update(update);
+        return ref.update(update);
     };
 }

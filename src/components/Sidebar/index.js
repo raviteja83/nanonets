@@ -8,6 +8,8 @@ import { NavLink } from 'react-router-dom';
 import FolderTree from '../FolderTree';
 import { GradientLoader } from '../GradientLoader';
 
+import { addListener, removeListener } from '../../actions/folder-actions';
+
 import {
     selectGetLoading,
     selectFirstVisit,
@@ -15,6 +17,22 @@ import {
 } from '../../selectors/folders-selectors';
 
 class Sidebar extends Component {
+    static propTypes = {
+        data: PropTypes.array.isRequired,
+        loading: PropTypes.bool.isRequired,
+        firstVisit: PropTypes.bool.isRequired,
+        addListener: PropTypes.func.isRequired,
+        removeListener: PropTypes.func.isRequired
+    };
+
+    componentDidMount() {
+        this.props.addListener();
+    }
+
+    componentWillUnmount() {
+        this.props.removeListener();
+    }
+
     render() {
         const { loading, data, firstVisit } = this.props;
 
@@ -26,7 +44,13 @@ class Sidebar extends Component {
                     </div>
                 ) : (
                     <Fragment>
-                        <NavLink to="/folders">Home</NavLink>
+                        <NavLink
+                            className="sidebar-nav-link"
+                            to="/folders"
+                            exact
+                        >
+                            Home
+                        </NavLink>
                         <FolderTree data={data} />
                     </Fragment>
                 )}
@@ -35,16 +59,17 @@ class Sidebar extends Component {
     }
 }
 
-Sidebar.propTypes = {
-    data: PropTypes.array.isRequired,
-    loading: PropTypes.bool.isRequired,
-    firstVisit: PropTypes.bool.isRequired
-};
-
 const mapStateToProps = createStructuredSelector({
     data: selectFormatDataToTree(),
     loading: selectGetLoading(),
     firstVisit: selectFirstVisit()
 });
 
-export default withRouter(connect(mapStateToProps)(Sidebar));
+const mapDispatchToProps = {
+    addListener,
+    removeListener
+};
+
+export default withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(Sidebar)
+);

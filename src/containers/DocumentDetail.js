@@ -13,6 +13,8 @@ import {
     removeListener
 } from '../actions/document-actions';
 
+import { updateDocDataForId } from '../actions/folder-actions';
+
 import {
     selectDataFromId,
     selectGetOneLoading,
@@ -25,6 +27,7 @@ import DocEditor from '../components/DocEditor';
 class DocumentDetail extends React.Component {
     static propTypes = {
         updateDataForId: PropTypes.func.isRequired,
+        updateDocDataForId: PropTypes.func.isRequired,
         getDataById: PropTypes.func.isRequired,
         addListener: PropTypes.func.isRequired,
         removeListener: PropTypes.func.isRequired,
@@ -53,8 +56,19 @@ class DocumentDetail extends React.Component {
     };
 
     handleUpdate = (value, title) => {
-        const { id, updateDataForId } = this.props;
-        updateDataForId(id, { content: value, title });
+        const {
+            id,
+            updateDataForId,
+            updateDocDataForId,
+            location: { state }
+        } = this.props;
+
+        updateDataForId(id, { content: value, title }).then(() => {
+            if (state) {
+                const { parentId, folderId } = state;
+                updateDocDataForId(folderId, parentId, { title });
+            }
+        });
     };
 
     render() {
@@ -88,7 +102,8 @@ const mapDispatchToProps = {
     updateDataForId,
     getDataById,
     addListener,
-    removeListener
+    removeListener,
+    updateDocDataForId
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DocumentDetail);

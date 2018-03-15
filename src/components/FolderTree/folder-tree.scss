@@ -1,0 +1,27 @@
+.folder-tree.panel-group {
+    .panel {
+        border-radius: 0;
+        border: 0 solid rgba($black, 0.05);
+        border-bottom-width: 1px;
+
+        &-default {
+            background: transparent;
+        }
+        &-heading {
+            padding: 0;
+            background: transparent;
+        }
+
+        &-body {
+            padding: 0;
+
+            .sidebar-nav-link {
+                padding-left: 30px;
+            }
+        }
+
+        & ~ .panel {
+            margin: 0;
+        }
+    }
+}

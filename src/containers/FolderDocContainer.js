@@ -36,7 +36,7 @@ class FolderDocContainer extends Component {
     };
 
     render() {
-        const { data, loading, firstVisit } = this.props;
+        const { data, loading, firstVisit, id } = this.props;
         const keys = Object.keys(data);
 
         return (
@@ -62,6 +62,7 @@ class FolderDocContainer extends Component {
                                     key={key}
                                     data={value}
                                     id={value.id}
+                                    state={{ parentId: key, folderId: id }}
                                 />
                             );
                         })

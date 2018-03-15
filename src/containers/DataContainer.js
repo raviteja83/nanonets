@@ -13,7 +13,6 @@ import {
     selectFirstVisit
 } from '../selectors/documents-selectors';
 import { GradientLoader } from '../components/GradientLoader';
-import EmptyDocs from '../components/EmptyDocs';
 
 class DataContainer extends Component {
     componentDidMount() {
@@ -40,18 +39,21 @@ class DataContainer extends Component {
                     <div className="loader">
                         <GradientLoader />
                     </div>
-                ) : keys.length === 0 ? (
-                    <EmptyDocs
-                        description="No Docs Found. Please create one"
-                        btnText="Add Doc"
-                        iconName="insert_drive_file"
-                        onClick={this.redirectToAdd}
-                    />
                 ) : (
-                    keys.map(key => {
-                        const value = data[key];
-                        return <DataCard key={key} data={value} id={key} />;
-                    })
+                    [
+                        <div
+                            key="blank"
+                            className="blank-card"
+                            onClick={this.redirectToAdd}
+                        >
+                            <i className="material-icons">insert_drive_file</i>
+                            <div className="blank-card-title">Add Doc</div>
+                        </div>,
+                        keys.map(key => {
+                            const value = data[key];
+                            return <DataCard key={key} data={value} id={key} />;
+                        })
+                    ]
                 )}
             </div>
         );

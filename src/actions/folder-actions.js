@@ -85,10 +85,10 @@ export const getIdError = createAction(GET_FOLDER_ID_ERROR);
 export function addListener() {
     return dispatch => {
         const ref = firebase.database().ref(`/folders`);
-        ref.on('value', snapshot => {
-            const key = snapshot.key;
+        ref.on('child_changed', snapshot => {
             const data = snapshot.val();
-            dispatch(updateSuccess({ [key]: data }));
+            const id = snapshot.key;
+            dispatch(getIdSuccess({ [id]: data }));
         });
     };
 }
@@ -105,6 +105,15 @@ export function removeListener() {
 export function updateDataForId(id, update) {
     return dispatch => {
         const ref = firebase.database().ref(`/folders/${id}`);
+        ref.update(update);
+    };
+}
+
+export function updateDocDataForId(folderId, docId, update) {
+    return dispatch => {
+        const ref = firebase
+            .database()
+            .ref(`/folders/${folderId}/documents/${docId}`);
         ref.update(update);
     };
 }

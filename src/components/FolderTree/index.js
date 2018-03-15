@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SortableTree from 'react-sortable-tree';
-import FileExplorerTheme from 'react-sortable-tree-theme-file-explorer';
+import { NavLink } from 'react-router-dom';
+import { PanelGroup, Panel } from 'react-bootstrap';
 import { isEqual } from 'lodash';
-import 'react-sortable-tree/style.css'; // This only needs to be imported once in your app
+
+import './folder-tree.scss';
 
 class Tree extends Component {
     static propTypes = {
@@ -16,6 +17,7 @@ class Tree extends Component {
             treeData: props.data
         };
     }
+
     componentWillReceiveProps({ data }) {
         if (!isEqual(this.props.data, data)) {
             this.setState({
@@ -24,26 +26,60 @@ class Tree extends Component {
         }
     }
 
-    handleNodeClick = () => {};
-
-    generateNodeProps = rowInfo => {
-        return {
-            onClick: () => {
-                this.handleNodeClick(rowInfo);
-            }
-        };
-    };
-
     render() {
+        const { treeData } = this.state;
+
         return (
-            <div className="folder-tree" style={{ height: 400 }}>
-                <SortableTree
-                    treeData={this.state.treeData}
-                    onChange={treeData => this.setState({ treeData })}
-                    theme={FileExplorerTheme}
-                    generateNodeProps={this.generateNodeProps}
-                />
-            </div>
+            <PanelGroup
+                accordion
+                id="sidebar-nav"
+                className="folder-tree"
+                onSelect={this.handleSelect}
+            >
+                {treeData.map(parent => {
+                    const { children, id, title } = parent;
+
+                    return (
+                        <Panel eventKey={id} key={id}>
+                            <Panel.Heading>
+                                <Panel.Title toggle>
+                                    <NavLink
+                                        className="sidebar-nav-link"
+                                        to={`/folders/${id}`}
+                                    >
+                                        {title}
+                                    </NavLink>
+                                </Panel.Title>
+                            </Panel.Heading>
+                            <Panel.Body collapsible>
+                                {children.map(child => {
+                                    const {
+                                        id: childId,
+                                        parentId,
+                                        title: childTitle
+                                    } = child;
+
+                                    return (
+                                        <NavLink
+                                            key={childId}
+                                            className="sidebar-nav-link"
+                                            to={{
+                                                pathname: `/docs/${childId}`,
+                                                state: {
+                                                    parentId,
+                                                    folderId: id
+                                                }
+                                            }}
+                                        >
+                                            {childTitle}
+                                        </NavLink>
+                                    );
+                                })}
+                            </Panel.Body>
+                        </Panel>
+                    );
+                })}
+            </PanelGroup>
         );
     }
 }

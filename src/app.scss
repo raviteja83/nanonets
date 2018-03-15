@@ -28,9 +28,10 @@
             }
         }
 
-        a {
+        &-nav-link {
             display: block;
             padding: 6px 12px;
+            font-size: $font-size-large;
             color: $brand-secondary;
             text-decoration: none;
             @include text-overflow-ellipsis;

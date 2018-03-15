@@ -33,13 +33,9 @@ export const selectData = () =>
     createSelector(selectLocalState(), state => state.data);
 
 export const selectDataFromId = () =>
-    createSelector(
-        selectData(),
-        (_, props) => props.id || props.match.params.action,
-        (data, id) => {
-            return data[id] || {};
-        }
-    );
+    createSelector(selectData(), selectCurrentId(), (data, id) => {
+        return data[id] || {};
+    });
 
 export const selectCurrentId = () => (_, props) => {
     return props.match.params.action;

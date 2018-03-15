@@ -6,8 +6,8 @@ import './data-card.scss';
 
 class DataCard extends Component {
     handleClick = () => {
-        const { history, id, type } = this.props;
-        history.push(`/${type}/${id}`);
+        const { history, id, type, state } = this.props;
+        history.push(`/${type}/${id}`, state);
     };
 
     render() {
@@ -24,7 +24,11 @@ DataCard.propTypes = {
     id: PropTypes.string.isRequired,
     data: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
-    type: PropTypes.string
+    type: PropTypes.string,
+    state: PropTypes.shape({
+        parentId: PropTypes.string,
+        folderId: PropTypes.string
+    })
 };
 
 DataCard.defaultProps = {
