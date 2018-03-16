@@ -11,7 +11,7 @@
 .container,
 .container-fluid {
     .mt-page-header &,
-    [class*="page-"] > & {
+    [class*='page-'] > & {
         @include addExtraPaddingAtScreenEdges;
     }
 
@@ -26,8 +26,7 @@
 
 // Disable Responsive Breakpoints
 .container,
-.container-fluid,
-body {
+.container-fluid {
     min-width: $container-large-desktop;
 }
 

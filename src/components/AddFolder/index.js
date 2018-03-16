@@ -23,7 +23,7 @@ class AddFolder extends Component {
 
     render() {
         return (
-            <Modal show>
+            <Modal show bsSize="xs">
                 <Modal.Header closeButton>
                     <Modal.Title>Add Folder</Modal.Title>
                 </Modal.Header>

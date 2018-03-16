@@ -111,17 +111,17 @@
         }
         .main-content {
             left: 0;
-            padding: 0;
+            padding: 0 0 0 10px;
             top: 36px;
 
             .data-container {
-                justify-content: center;
+                margin-top: 20px;
                 max-height: 100%;
                 overflow: auto;
 
                 .data-card,
                 .blank-card {
-                    flex: 0 0 45%;
+                    flex: 0 0 46.5%;
                 }
             }
         }

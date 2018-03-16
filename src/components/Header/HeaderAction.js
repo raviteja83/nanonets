@@ -9,7 +9,7 @@ import { selectData, selectLoading } from '../../selectors/header-selectors';
 const HeaderAction = ({ data: { title }, loading }) => {
     return loading ? null : (
         <div className="header header-action">
-            <Link to="/docs">
+            <Link to="/folders">
                 <i className="fa fa-times mr-5" />
             </Link>
             <div className="header-title">{title}</div>
@@ -18,7 +18,9 @@ const HeaderAction = ({ data: { title }, loading }) => {
 };
 
 HeaderAction.propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    isFolder: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = createStructuredSelector({
