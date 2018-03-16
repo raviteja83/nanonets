@@ -1,4 +1,6 @@
 .document-editor {
+    max-height: 100%;
+    overflow: auto;
     padding: 20px;
     background: $white;
     box-shadow: 0 2px 2px 2px rgba($black, 0.2);

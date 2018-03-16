@@ -19,7 +19,6 @@ const HeaderAction = ({ data: { title }, loading }) => {
 
 HeaderAction.propTypes = {
     data: PropTypes.object.isRequired,
-    isFolder: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired
 };
 
