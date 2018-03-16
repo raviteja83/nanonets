@@ -15,6 +15,7 @@ import {
     selectFirstVisit,
     selectFormatDataToTree
 } from '../../selectors/folders-selectors';
+import { selectEmail } from '../../selectors/login-selectors';
 
 class Sidebar extends Component {
     static propTypes = {
@@ -34,7 +35,7 @@ class Sidebar extends Component {
     }
 
     render() {
-        const { loading, data, firstVisit } = this.props;
+        const { loading, data, firstVisit, email } = this.props;
 
         return (
             <div className="sidebar">
@@ -44,6 +45,7 @@ class Sidebar extends Component {
                     </div>
                 ) : (
                     <Fragment>
+                        <div className="sidebar-nav-link">{email}</div>
                         <NavLink
                             className="sidebar-nav-link sidebar-nav-link--home"
                             to="/folders"
@@ -71,7 +73,8 @@ class Sidebar extends Component {
 const mapStateToProps = createStructuredSelector({
     data: selectFormatDataToTree(),
     loading: selectGetLoading(),
-    firstVisit: selectFirstVisit()
+    firstVisit: selectFirstVisit(),
+    email: selectEmail()
 });
 
 const mapDispatchToProps = {

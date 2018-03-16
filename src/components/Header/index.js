@@ -11,7 +11,9 @@ const Header = () => {
         <Switch>
             <Route path="/docs/:action" component={HeaderAction} />
             <Route path="/docs" exact component={HeaderNav} />
-            <Route path="/docs/add" exact component={HeaderNav} />
+            <Route path="/" exact component={HeaderNav} />
+            <Route path="/folders" exact component={HeaderNav} />
+            <Route path="/folders/:action" component={HeaderAction} />
             <Route path="/logout" exact component={HeaderNav} />
         </Switch>
     );

@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import {
-    selectDataFromId,
-    selectGetOneLoading
-} from '../../selectors/documents-selectors';
+import { selectData, selectLoading } from '../../selectors/header-selectors';
 
 const HeaderAction = ({ data: { title }, loading }) => {
     return loading ? null : (
@@ -25,8 +22,8 @@ HeaderAction.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-    data: selectDataFromId(),
-    loading: selectGetOneLoading()
+    data: selectData(),
+    loading: selectLoading()
 });
 
 export default connect(mapStateToProps)(HeaderAction);

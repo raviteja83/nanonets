@@ -32,6 +32,9 @@ export const selectFirstVisit = () =>
 export const selectData = () =>
     createSelector(selectLocalState(), state => state.data);
 
+export const selectDataForId = id =>
+    createSelector(selectData(), data => data[id] || {});
+
 export const selectDataFromId = () =>
     createSelector(selectData(), selectCurrentId(), (data, id) => {
         return data[id] || {};

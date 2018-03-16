@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { PanelGroup, Panel } from 'react-bootstrap';
+import { connect } from 'react-redux';
+
+import Editable from '../Editable';
+
+import { updateDataForId } from '../../actions/folder-actions';
 
 import './folder-tree.scss';
 
 class Tree extends Component {
     static propTypes = {
-        data: PropTypes.array.isRequired
+        data: PropTypes.array.isRequired,
+        updateDataForId: PropTypes.func.isRequired
     };
 
     state = {
@@ -18,6 +24,10 @@ class Tree extends Component {
         this.setState({
             activeKey
         });
+    };
+
+    handleFolderRename = (id, title) => {
+        this.props.updateDataForId(id, { title });
     };
 
     render() {
@@ -45,6 +55,19 @@ class Tree extends Component {
                                         to={`/folders/${id}`}
                                     >
                                         <span className="sidebar-nav-link-content">
+                                            <i className="material-icons">
+                                                folder
+                                            </i>
+                                            <span className="ml-5">
+                                                <Editable
+                                                    text={title}
+                                                    name={id}
+                                                    onSubmit={
+                                                        this.handleFolderRename
+                                                    }
+                                                    inputProps={{ rows: 1 }}
+                                                />
+                                            </span>
                                             {hasChildren && (
                                                 <i className="material-icons">
                                                     {activeKey === id
@@ -52,12 +75,6 @@ class Tree extends Component {
                                                         : 'chevron_right'}
                                                 </i>
                                             )}
-                                            <i className="material-icons">
-                                                folder
-                                            </i>
-                                            <span className="ml-5">
-                                                {title}
-                                            </span>
                                         </span>
                                     </NavLink>
                                 </Panel.Toggle>
@@ -100,4 +117,8 @@ class Tree extends Component {
     }
 }
 
-export default Tree;
+const mapDispatchToProps = {
+    updateDataForId
+};
+
+export default connect(null, mapDispatchToProps)(Tree);

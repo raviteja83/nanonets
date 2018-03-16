@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FormControl, ControlLabel, FormGroup, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { login, register } from './actions/login-actions';
 
@@ -67,6 +68,21 @@ class Login extends Component {
                 >
                     {isLogin ? 'Login' : 'Register'}
                 </Button>
+                {isLogin ? (
+                    <span className="ml-10">
+                        New User?
+                        <Link to="/register" className="ml-5">
+                            Register
+                        </Link>
+                    </span>
+                ) : (
+                    <span className="ml-10">
+                        Have an account?
+                        <Link to="/login" className="ml-5">
+                            Login
+                        </Link>
+                    </span>
+                )}
             </div>
         );
     }
