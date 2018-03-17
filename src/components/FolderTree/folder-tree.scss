@@ -1,4 +1,6 @@
 .folder-tree.panel-group {
+    max-height: 78%;
+    overflow-y: auto;
     .panel {
         border-radius: 0;
         border: 0 solid rgba($black, 0.05);
