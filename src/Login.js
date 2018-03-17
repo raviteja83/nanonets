@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { FormControl, ControlLabel, FormGroup, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 
 import { login, register } from './actions/login-actions';
 
 import './login.scss';
+import {
+    selectLoginError,
+    selectRegisterError
+} from './selectors/login-selectors';
 
 class Login extends Component {
+    static propTypes = {
+        location: PropTypes.object.isRequired,
+        loginError: PropTypes.string,
+        registerError: PropTypes.string
+    };
     state = {
         username: '',
         password: ''
@@ -22,11 +33,12 @@ class Login extends Component {
 
     handleLoginRegistration = () => {
         if (this.props.location.pathname === '/login') {
-            this.props.login(this.state).then(() => {
-                this.props.history.push('/');
+            this.props.login(this.state, () => {
+                console.log('login');
+                // this.props.history.push('/');
             });
         } else {
-            this.props.register(this.state).then(() => {
+            this.props.register(this.state, () => {
                 this.props.history.push('/');
             });
         }
@@ -34,7 +46,11 @@ class Login extends Component {
 
     render() {
         const { username, password } = this.state;
-        const { location: { pathname } } = this.props;
+        const {
+            location: { pathname },
+            loginError,
+            registerError
+        } = this.props;
         const isLogin = pathname === '/login';
 
         return (
@@ -83,14 +99,22 @@ class Login extends Component {
                         </Link>
                     </span>
                 )}
+                <div className="text-danger mt-10">
+                    {isLogin ? loginError : registerError}
+                </div>
             </div>
         );
     }
 }
+
+const mapStateToProps = createStructuredSelector({
+    loginError: selectLoginError(),
+    resgisterError: selectRegisterError()
+});
 
 const mapDispatchToActions = {
     login,
     register
 };
 
-export default connect(null, mapDispatchToActions)(Login);
+export default connect(mapStateToProps, mapDispatchToActions)(Login);

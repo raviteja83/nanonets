@@ -11,15 +11,16 @@ import {
     SAVE_USER_INFO
 } from '../constants/action-types';
 
-export function login({ username = '', password = '' }) {
+export function login({ username = '', password = '' }, callback) {
     return dispatch => {
         dispatch(loginLoading(true));
-        return firebase
+        firebase
             .auth()
             .signInWithEmailAndPassword(username, password)
             .then(response => {
                 dispatch(loginSuccess(response));
                 dispatch(loginLoading(false));
+                callback && callback();
             })
             .catch(function(error) {
                 // Handle Errors here.
@@ -33,7 +34,7 @@ export const loginLoading = createAction(LOGIN_LOADING);
 export const loginSuccess = createAction(LOGIN_SUCCESS);
 export const loginError = createAction(LOGIN_ERROR);
 
-export function register({ username = '', password = '' }) {
+export function register({ username = '', password = '' }, callback) {
     return dispatch => {
         dispatch(registerLoading(true));
         return firebase
@@ -41,6 +42,7 @@ export function register({ username = '', password = '' }) {
             .createUserWithEmailAndPassword(username, password)
             .then(() => {
                 dispatch(registerLoading(false));
+                callback && callback();
             })
             .catch(function(error) {
                 // Handle Errors here.

@@ -31,11 +31,27 @@ export function loading(state = initialState.loading, action) {
 
 export function error(state = initialState.error, action) {
     switch (action.type) {
+        case LOGIN_LOADING:
+            if (action.payload) {
+                return {
+                    ...state,
+                    login: ''
+                };
+            }
+            return state;
         case LOGIN_ERROR:
             return {
                 ...state,
                 login: action.payload
             };
+        case REGISTER_LOADING:
+            if (action.payload) {
+                return {
+                    ...state,
+                    register: ''
+                };
+            }
+            return state;
         case REGISTER_ERROR:
             return {
                 ...state,

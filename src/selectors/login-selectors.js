@@ -15,7 +15,9 @@ export const selectError = () =>
     createSelector(selectLocalState(), state => state.error);
 
 export const selectLoginError = () =>
-    createSelector(selectError(), error => error.login);
+    createSelector(selectError(), error => {
+        return error.login;
+    });
 
 export const selectRegisterError = () =>
     createSelector(selectError(), error => error.register);
