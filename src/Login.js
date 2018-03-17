@@ -34,8 +34,7 @@ class Login extends Component {
     handleLoginRegistration = () => {
         if (this.props.location.pathname === '/login') {
             this.props.login(this.state, () => {
-                console.log('login');
-                // this.props.history.push('/');
+                this.props.history.push('/');
             });
         } else {
             this.props.register(this.state, () => {
